@@ -1,0 +1,143 @@
+:root{
+    --bg:#090909;
+    --card:#171717;
+    --accent:#ff5ca8;
+    --accent2:#ffd6ea;
+    --text:#ffffff;
+    --muted:#cfcfcf;
+    --radius:22px;
+    --shadow:0 18px 45px rgba(0,0,0,.35);
+    --transition:.45s ease;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:"Poppins",sans-serif;
+    overflow-x:hidden;
+}
+
+.screen{
+    position:fixed;
+    inset:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    background:#090909;
+}
+
+.content{
+    padding:32px;
+}
+
+.content h1{
+    font-size:3rem;
+    margin-bottom:18px;
+}
+
+.content p{
+    color:var(--muted);
+    margin-bottom:30px;
+}
+
+button{
+    border:none;
+    border-radius:999px;
+    background:var(--accent);
+    color:#fff;
+    padding:15px 34px;
+    cursor:pointer;
+    font-size:1rem;
+    transition:var(--transition);
+}
+
+button:hover{
+    transform:scale(1.05);
+}
+
+.hidden{
+    display:none;
+}
+
+header{
+    padding:26px;
+    text-align:center;
+}
+
+.hero{
+    width:min(950px,92%);
+    margin:auto;
+    text-align:center;
+}
+
+.hero img{
+    width:100%;
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    margin-bottom:24px;
+}
+
+.hero h1{
+    margin-bottom:14px;
+}
+
+.hero p{
+    color:var(--muted);
+    line-height:1.8;
+}
+
+.gallery{
+    width:min(1100px,92%);
+    margin:60px auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:18px;
+}
+
+.gallery img{
+    width:100%;
+    aspect-ratio:3/4;
+    object-fit:cover;
+    border-radius:18px;
+    transition:var(--transition);
+    box-shadow:var(--shadow);
+}
+
+.gallery img:hover{
+    transform:translateY(-8px);
+}
+
+.message{
+    width:min(850px,92%);
+    margin:70px auto;
+    text-align:center;
+    line-height:1.9;
+}
+
+#typing{
+    margin-top:22px;
+    font-size:1.05rem;
+}
+
+@media(max-width:700px){
+
+.content h1{
+    font-size:2.2rem;
+}
+
+.hero h1{
+    font-size:1.8rem;
+}
+
+button{
+    width:100%;
+}
+
+}
