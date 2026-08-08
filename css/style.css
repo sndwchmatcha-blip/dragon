@@ -9,12 +9,15 @@
     --gold: #d7c29a;
     --gold-soft: rgba(215, 194, 154, 0.65);
     --gold-faint: rgba(215, 194, 154, 0.16);
+
     --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
     --ease-soft: cubic-bezier(0.16, 1, 0.3, 1);
     --ease-book: cubic-bezier(0.645, 0.045, 0.355, 1);
+
     --intro-duration: 1400ms;
     --book-duration: 1500ms;
     --ending-duration: 2200ms;
+
     --book-width: min(72vw, 1080px);
     --book-height: min(72vh, 680px);
     --book-ratio: 1.58;
@@ -107,6 +110,9 @@ img {
     opacity: 0;
     pointer-events: none;
     transform: translateZ(0);
+    transition:
+        opacity 1000ms var(--ease-soft),
+        visibility 1000ms var(--ease-soft);
 }
 
 .screen.active {
@@ -1440,314 +1446,7 @@ img {
 }
 
 .music-indicator.playing .music-icon i:nth-child(4) {
-    animation-d
-        
-.book-progress {
-    position: absolute;
-    bottom: clamp(25px, 4vh, 43px);
-    left: 50%;
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    transform: translateX(-50%);
-    opacity: 0;
-}
-
-.progress-dot {
-    width: 3px;
-    height: 3px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.2);
-    transition:
-        transform 500ms var(--ease-smooth),
-        background 400ms ease,
-        box-shadow 400ms ease;
-}
-
-.progress-dot.active {
-    transform: scale(1.8);
-    background: rgba(215, 194, 154, 0.75);
-    box-shadow: 0 0 10px rgba(215, 194, 154, 0.25);
-}
-
-.progress-line {
-    width: 15px;
-    height: 1px;
-    background: rgba(255, 255, 255, 0.1);
-}
-
-.ending-screen {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #000;
-}
-
-.ending-background {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-}
-
-.ending-glow {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(90px);
-    opacity: 0;
-}
-
-.ending-glow-one {
-    top: 20%;
-    left: 25%;
-    width: 45vw;
-    height: 45vw;
-    background: rgba(157, 119, 141, 0.045);
-}
-
-.ending-glow-two {
-    right: 20%;
-    bottom: 15%;
-    width: 40vw;
-    height: 40vw;
-    background: rgba(103, 122, 151, 0.035);
-}
-
-.ending-glow-three {
-    top: 45%;
-    left: 48%;
-    width: 20vw;
-    height: 20vw;
-    background: rgba(215, 194, 154, 0.035);
-}
-
-.ending-content {
-    position: relative;
-    z-index: 5;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    opacity: 0;
-    transform: translateY(20px);
-}
-
-.ending-small {
-    display: flex;
-    align-items: center;
-    gap: 13px;
-    margin-bottom: 28px;
-    font-size: 7px;
-    line-height: 1;
-    font-weight: 500;
-    letter-spacing: 0.4em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.24);
-    transform: translateX(0.2em);
-}
-
-.ending-small span {
-    width: 28px;
-    height: 1px;
-    background: rgba(255, 255, 255, 0.11);
-}
-
-.ending-title {
-    margin: 0;
-    font-family: "Cormorant Garamond", serif;
-    font-size: clamp(54px, 9vw, 120px);
-    line-height: 0.82;
-    font-weight: 300;
-    letter-spacing: -0.025em;
-    color: rgba(255, 255, 255, 0.94);
-}
-
-.ending-divider {
-    display: flex;
-    align-items: center;
-    gap: 13px;
-    width: min(190px, 40vw);
-    margin-top: 32px;
-}
-
-.ending-divider span {
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(215, 194, 154, 0.35)
-    );
-}
-
-.ending-divider span:last-child {
-    background: linear-gradient(
-        90deg,
-        rgba(215, 194, 154, 0.35),
-        transparent
-    );
-}
-
-.ending-divider i {
-    font-family: "Cormorant Garamond", serif;
-    font-size: 17px;
-    line-height: 1;
-    font-style: normal;
-    color: rgba(215, 194, 154, 0.75);
-}
-
-.ending-name {
-    margin-top: 24px;
-    font-family: "Italianno", cursive;
-    font-size: clamp(48px, 7vw, 92px);
-    line-height: 0.8;
-    font-weight: 400;
-    color: rgba(255, 255, 255, 0.78);
-    text-shadow:
-        0 0 35px rgba(255, 255, 255, 0.06),
-        0 0 80px rgba(215, 194, 154, 0.04);
-}
-
-.ending-particle {
-    position: absolute;
-    width: 2px;
-    height: 2px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.38);
-    box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
-    opacity: 0;
-}
-
-[data-state="cover"] .spread-one,
-[data-state="cover"] .spread-two {
-    visibility: hidden;
-}
-
-[data-state="page-one"] .spread-one,
-[data-state="page-two"] .spread-two {
-    visibility: visible;
-    opacity: 1;
-    pointer-events: auto;
-}
-
-[data-state="page-one"] .book-cover-front {
-    transform:
-        rotateY(-180deg)
-        translateZ(18px);
-}
-
-[data-state="page-two"] .book-cover-front {
-    transform:
-        rotateY(-180deg)
-        translateZ(18px);
-}
-
-[data-state="page-two"] .spread-one {
-    opacity: 0;
-    visibility: hidden;
-}
-
-[data-state="back-cover"] .book-cover-front {
-    transform:
-        rotateY(-180deg)
-        translateZ(18px);
-}
-
-[data-state="back-cover"] .spread-two {
-    opacity: 0;
-    visibility: hidden;
-}
-
-[data-state="back-cover"] .book-cover-back {
-    transform:
-        rotateY(0deg)
-        translateZ(18px);
-}
-
-[data-state="page-one"] .page-one-left,
-[data-state="page-one"] .page-one-right,
-[data-state="page-two"] .page-two-left,
-[data-state="page-two"] .page-two-right {
-    pointer-events: auto;
-}
-
-body.intro-ready .intro-light {
-    opacity: 1;
-    animation: introLightPulse 7000ms ease-in-out infinite;
-}
-
-body.intro-ready .intro-content {
-    opacity: 1;
-    transform: translateY(0);
-    transition:
-        opacity 1400ms var(--ease-soft) 300ms,
-        transform 1400ms var(--ease-soft) 300ms;
-}
-
-body.book-active .aurora,
-body.book-active .ambient-glow {
-    opacity: 1;
-}
-
-body.book-active .book-halo {
-    opacity: 1;
-}
-
-body.book-active .book-shadow {
-    opacity: 0.7;
-}
-
-body.book-active .book-top-label,
-body.book-active .music-indicator,
-body.book-active .book-progress {
-    opacity: 1;
-    transition:
-        opacity 1000ms var(--ease-soft);
-}
-
-body.book-active .floating-word {
-    opacity: 1;
-}
-
-body.ending-active .ending-content {
-    opacity: 1;
-    transform: translateY(0);
-    transition:
-        opacity 1800ms var(--ease-soft) 500ms,
-        transform 1800ms var(--ease-soft) 500ms;
-}
-
-body.ending-active .ending-glow {
-    opacity: 1;
-}
-
-body.ending-active .aurora,
-body.ending-active .ambient-glow {
-    opacity: 0.2;
-}
-
-body.book-opened .book-cover-front .cover-sheen {
-    animation: coverSheen 1800ms var(--ease-soft) forwards;
-}
-
-@keyframes preloaderLoad {
-    0% {
-        width: 0;
-    }
-.music-indicator.playing .music-icon i {
-    animation: musicBars 900ms ease-in-out infinite alternate;
-}
-
-.music-indicator.playing .music-icon i:nth-child(2) {
-    animation-delay: -300ms;
-}
-
-.music-indicator.playing .music-icon i:nth-child(3) {
-    animation-delay: -500ms;
-}
-
-.music-indicator.playing .music-icon i:nth-child(4) {
-    animation-delay: -700ms;
+    animation-delay: -150ms;
 }
 
 .book-progress {
@@ -1929,6 +1628,8 @@ body.book-opened .book-cover-front .cover-sheen {
 [data-state="cover"] .spread-one,
 [data-state="cover"] .spread-two {
     visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
 }
 
 [data-state="page-one"] .spread-one,
@@ -1938,32 +1639,19 @@ body.book-opened .book-cover-front .cover-sheen {
     pointer-events: auto;
 }
 
-[data-state="page-one"] .book-cover-front {
-    transform:
-        rotateY(-180deg)
-        translateZ(18px);
-}
-
-[data-state="page-two"] .book-cover-front {
-    transform:
-        rotateY(-180deg)
-        translateZ(18px);
-}
-
-[data-state="page-two"] .spread-one {
-    opacity: 0;
-    visibility: hidden;
-}
-
+[data-state="page-one"] .book-cover-front,
+[data-state="page-two"] .book-cover-front,
 [data-state="back-cover"] .book-cover-front {
     transform:
         rotateY(-180deg)
         translateZ(18px);
 }
 
+[data-state="page-two"] .spread-one,
 [data-state="back-cover"] .spread-two {
     opacity: 0;
     visibility: hidden;
+    pointer-events: none;
 }
 
 [data-state="back-cover"] .book-cover-back {
@@ -1977,6 +1665,15 @@ body.book-opened .book-cover-front .cover-sheen {
 [data-state="page-two"] .page-two-left,
 [data-state="page-two"] .page-two-right {
     pointer-events: auto;
+}
+
+[data-state="back-cover"] .finish-reading {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition:
+        opacity 900ms var(--ease-soft) 500ms,
+        visibility 900ms var(--ease-soft);
 }
 
 body.intro-ready .intro-light {
@@ -2017,6 +1714,10 @@ body.book-active .floating-word {
     opacity: 1;
 }
 
+body.book-active .heart-layer .floating-heart {
+    opacity: 1;
+}
+
 body.ending-active .ending-content {
     opacity: 1;
     transform: translateY(0);
@@ -2036,6 +1737,10 @@ body.ending-active .ambient-glow {
 
 body.book-opened .book-cover-front .cover-sheen {
     animation: coverSheen 1800ms var(--ease-soft) forwards;
+}
+
+body.ending-transition .book-screen {
+    opacity: 0;
 }
 
 @keyframes preloaderLoad {
