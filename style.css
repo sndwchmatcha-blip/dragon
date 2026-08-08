@@ -1378,3 +1378,1392 @@ body.book-opened .book-cover-front .cover-sheen {
         transform: scaleY(1);
     }
 }
+.screen {
+    transition:
+        opacity 1200ms var(--ease-soft),
+        visibility 1200ms var(--ease-soft);
+}
+
+.intro-screen.active .intro-eyebrow {
+    animation: introEyebrowIn 1100ms var(--ease-soft) 550ms both;
+}
+
+.intro-screen.active .intro-title {
+    animation: introTitleIn 1500ms var(--ease-soft) 700ms both;
+}
+
+.intro-screen.active .intro-divider {
+    animation: introDividerIn 1100ms var(--ease-soft) 900ms both;
+}
+
+.intro-screen.active .intro-description {
+    animation: introDescriptionIn 1200ms var(--ease-soft) 1000ms both;
+}
+
+.intro-screen.active .open-button {
+    animation: introButtonIn 1300ms var(--ease-smooth) 1150ms both;
+}
+
+.intro-screen.active .intro-footnote {
+    animation: introFootnoteIn 1100ms var(--ease-soft) 1350ms both;
+}
+
+.book-screen.active .book-stage {
+    animation: bookStageIn 1600ms var(--ease-smooth) 150ms both;
+}
+
+.book-screen.active .book-shadow {
+    animation: bookShadowIn 1500ms var(--ease-smooth) 400ms both;
+}
+
+.book-screen.active .book-top-label {
+    animation: bookLabelIn 1200ms var(--ease-soft) 700ms both;
+}
+
+.book-screen.active .music-indicator {
+    animation: interfaceItemIn 1000ms var(--ease-soft) 950ms both;
+}
+
+.book-screen.active .book-progress {
+    animation: interfaceItemIn 1000ms var(--ease-soft) 1050ms both;
+}
+
+.book-screen.active .floating-word-one {
+    animation:
+        floatingWordIn 1800ms var(--ease-soft) 800ms both,
+        floatingOne 10000ms ease-in-out 2600ms infinite alternate;
+}
+
+.book-screen.active .floating-word-two {
+    animation:
+        floatingWordIn 1800ms var(--ease-soft) 1000ms both,
+        floatingTwo 12000ms ease-in-out 2800ms infinite alternate;
+}
+
+.book-screen.active .floating-word-three {
+    animation:
+        floatingWordIn 1600ms var(--ease-soft) 1200ms both,
+        floatingThree 9000ms ease-in-out 2500ms infinite alternate;
+}
+
+.book-screen.active .aurora-one {
+    animation: auroraOne 15000ms ease-in-out infinite alternate;
+}
+
+.book-screen.active .aurora-two {
+    animation: auroraTwo 18000ms ease-in-out infinite alternate;
+}
+
+.book-screen.active .aurora-three {
+    animation: auroraThree 13000ms ease-in-out infinite alternate;
+}
+
+.book-screen.active .glow-one {
+    animation: ambientGlowOne 11000ms ease-in-out infinite alternate;
+}
+
+.book-screen.active .glow-two {
+    animation: ambientGlowTwo 14000ms ease-in-out infinite alternate;
+}
+
+.book-screen.active .glow-three {
+    animation: ambientGlowThree 16000ms ease-in-out infinite alternate;
+}
+
+.ending-screen.active .ending-small {
+    animation: endingSmallIn 1100ms var(--ease-soft) 850ms both;
+}
+
+.ending-screen.active .ending-title {
+    animation: endingTitleIn 1600ms var(--ease-soft) 1050ms both;
+}
+
+.ending-screen.active .ending-divider {
+    animation: endingDividerIn 1100ms var(--ease-soft) 1350ms both;
+}
+
+.ending-screen.active .ending-name {
+    animation: endingNameIn 1800ms var(--ease-soft) 1500ms both;
+}
+
+.ending-screen.active .ending-glow-one {
+    animation: endingGlowOne 9000ms ease-in-out 2000ms infinite alternate;
+}
+
+.ending-screen.active .ending-glow-two {
+    animation: endingGlowTwo 11000ms ease-in-out 2400ms infinite alternate;
+}
+
+.ending-screen.active .ending-glow-three {
+    animation: endingGlowThree 7000ms ease-in-out 2800ms infinite alternate;
+}
+
+.ending-screen.active .ending-particles .ending-particle {
+    animation: endingParticleFloat var(--particle-duration, 8000ms) ease-in-out var(--particle-delay, 0ms) infinite;
+}
+
+.book[data-state="cover"] .book-cover-front {
+    transition:
+        transform 1500ms var(--ease-book),
+        filter 1500ms var(--ease-book);
+}
+
+.book[data-state="page-one"] .book-cover-front {
+    transition:
+        transform 1500ms var(--ease-book),
+        filter 1500ms var(--ease-book);
+}
+
+.book[data-state="page-two"] .book-cover-front {
+    transition:
+        transform 1500ms var(--ease-book),
+        filter 1500ms var(--ease-book);
+}
+
+.book[data-state="back-cover"] .book-cover-back {
+    transition:
+        transform 1500ms var(--ease-book),
+        filter 1500ms var(--ease-book);
+}
+
+.book-spread {
+    transition:
+        opacity 0ms linear 0ms,
+        visibility 0ms linear 0ms;
+}
+
+.book-page {
+    transition:
+        transform 1300ms var(--ease-book),
+        filter 1300ms var(--ease-book);
+}
+
+.book-cover-front .cover-image,
+.book-cover-back .cover-image {
+    transition:
+        transform 1600ms var(--ease-smooth),
+        filter 1200ms ease;
+}
+
+.book:hover .cover-image {
+    transform: scale(1.025);
+    filter:
+        saturate(0.86)
+        contrast(1.06)
+        brightness(0.82);
+}
+
+.book-cover-front::after,
+.book-cover-back::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 100;
+    pointer-events: none;
+    opacity: 0;
+    background:
+        linear-gradient(
+            105deg,
+            transparent 0%,
+            transparent 38%,
+            rgba(255, 255, 255, 0.09) 49%,
+            rgba(255, 255, 255, 0.025) 54%,
+            transparent 66%,
+            transparent 100%
+        );
+    transform: translateX(-120%);
+}
+
+.book[data-state="page-one"] .book-cover-front::after,
+.book[data-state="page-two"] .book-cover-front::after {
+    animation: pageTurnLight 1500ms var(--ease-soft) both;
+}
+
+.book[data-state="back-cover"] .book-cover-back::after {
+    animation: pageTurnLight 1500ms var(--ease-soft) both;
+}
+
+.book-page::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    pointer-events: none;
+    opacity: 0;
+    background:
+        linear-gradient(
+            90deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.1) 48%,
+            transparent 100%
+        );
+    transform: translateX(-120%);
+}
+
+.book-page.flipping::after {
+    animation: pageSurfaceLight 1100ms var(--ease-soft) both;
+}
+
+.book-page.active-page {
+    filter: brightness(1);
+}
+
+.book-page.inactive-page {
+    filter: brightness(0.82);
+}
+
+.finish-reading.visible {
+    visibility: visible;
+    pointer-events: auto;
+    animation: finishReadingIn 1200ms var(--ease-soft) both;
+}
+
+.finish-reading.hiding {
+    animation: finishReadingOut 500ms var(--ease-soft) both;
+}
+
+.music-indicator.visible {
+    opacity: 1;
+}
+
+.book-progress.visible {
+    opacity: 1;
+}
+
+.transition-overlay.active {
+    visibility: visible;
+    pointer-events: auto;
+    animation: transitionFadeIn 1800ms var(--ease-soft) forwards;
+}
+
+.transition-overlay.reverse {
+    animation: transitionFadeOut 1200ms var(--ease-soft) forwards;
+}
+
+.intro-screen.leaving .intro-content {
+    animation: introExit 1000ms var(--ease-soft) both;
+}
+
+.intro-screen.leaving .intro-light {
+    animation: introLightExit 1100ms var(--ease-soft) both;
+}
+
+.book-screen.leaving {
+    animation: bookScreenExit 1600ms var(--ease-soft) both;
+}
+
+.ending-screen.entering {
+    animation: endingScreenEnter 1800ms var(--ease-soft) both;
+}
+
+@keyframes introEyebrowIn {
+    0% {
+        opacity: 0;
+        transform: translateY(18px);
+        letter-spacing: 0.6em;
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        letter-spacing: 0.38em;
+    }
+}
+
+@keyframes introTitleIn {
+    0% {
+        opacity: 0;
+        transform: translateY(35px) scale(0.97);
+        filter: blur(8px);
+    }
+
+    55% {
+        opacity: 1;
+        filter: blur(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+@keyframes introDividerIn {
+    0% {
+        opacity: 0;
+        transform: scaleX(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scaleX(1);
+    }
+}
+
+@keyframes introDescriptionIn {
+    0% {
+        opacity: 0;
+        transform: translateY(15px);
+        filter: blur(4px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+
+@keyframes introButtonIn {
+    0% {
+        opacity: 0;
+        transform: translateY(24px) scale(0.78);
+    }
+
+    55% {
+        opacity: 1;
+        transform: translateY(-4px) scale(1.025);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes introFootnoteIn {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes introExit {
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-25px) scale(0.985);
+        filter: blur(5px);
+    }
+}
+
+@keyframes introLightExit {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(1.5);
+    }
+}
+
+@keyframes bookStageIn {
+    0% {
+        opacity: 0;
+        transform: translateY(35px) scale(0.94);
+        filter: blur(5px);
+    }
+
+    55% {
+        opacity: 1;
+        filter: blur(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+@keyframes bookShadowIn {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) scaleX(0.65);
+    }
+
+    100% {
+        opacity: 0.7;
+        transform: translateX(-50%) scaleX(1);
+    }
+}
+
+@keyframes bookLabelIn {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -12px);
+        letter-spacing: 0.5em;
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(-50%, 0);
+        letter-spacing: normal;
+    }
+}
+
+@keyframes interfaceItemIn {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes floatingWordIn {
+    0% {
+        opacity: 0;
+        filter: blur(8px);
+    }
+
+    100% {
+        opacity: 1;
+        filter: blur(0);
+    }
+}
+
+@keyframes floatingOne {
+    0% {
+        transform: translate3d(0, 0, 0) rotate(-12deg);
+    }
+
+    100% {
+        transform: translate3d(25px, -18px, 0) rotate(-8deg);
+    }
+}
+
+@keyframes floatingTwo {
+    0% {
+        transform: translate3d(0, 0, 0) rotate(10deg);
+    }
+
+    100% {
+        transform: translate3d(-22px, 15px, 0) rotate(6deg);
+    }
+}
+
+@keyframes floatingThree {
+    0% {
+        transform: translate3d(0, 0, 0) rotate(0deg);
+    }
+
+    100% {
+        transform: translate3d(-12px, 20px, 0) rotate(12deg);
+    }
+}
+
+@keyframes auroraOne {
+    0% {
+        transform: translate3d(-5%, -3%, 0) scale(0.95);
+    }
+
+    50% {
+        transform: translate3d(12%, 8%, 0) scale(1.08);
+    }
+
+    100% {
+        transform: translate3d(2%, 15%, 0) scale(1);
+    }
+}
+
+@keyframes auroraTwo {
+    0% {
+        transform: translate3d(6%, 5%, 0) scale(1);
+    }
+
+    50% {
+        transform: translate3d(-10%, -8%, 0) scale(1.12);
+    }
+
+    100% {
+        transform: translate3d(-2%, 5%, 0) scale(0.94);
+    }
+}
+
+@keyframes auroraThree {
+    0% {
+        transform: translate3d(0, 0, 0) scale(0.9);
+    }
+
+    50% {
+        transform: translate3d(7%, -8%, 0) scale(1.12);
+    }
+
+    100% {
+        transform: translate3d(-8%, 6%, 0) scale(0.98);
+    }
+}
+
+@keyframes ambientGlowOne {
+    0% {
+        transform: translate3d(-10%, 0, 0) scale(0.85);
+    }
+
+    100% {
+        transform: translate3d(10%, 8%, 0) scale(1.15);
+    }
+}
+
+@keyframes ambientGlowTwo {
+    0% {
+        transform: translate3d(8%, -8%, 0) scale(1);
+    }
+
+    100% {
+        transform: translate3d(-10%, 10%, 0) scale(0.8);
+    }
+}
+
+@keyframes ambientGlowThree {
+    0% {
+        transform: translate3d(0, 5%, 0) scale(0.9);
+    }
+
+    100% {
+        transform: translate3d(15%, -5%, 0) scale(1.1);
+    }
+}
+
+@keyframes pageTurnLight {
+    0% {
+        opacity: 0;
+        transform: translateX(-120%);
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateX(120%);
+    }
+}
+
+@keyframes pageSurfaceLight {
+    0% {
+        opacity: 0;
+        transform: translateX(-120%);
+    }
+
+    20% {
+        opacity: 0.8;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateX(120%);
+    }
+}
+
+@keyframes finishReadingIn {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, 18px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}
+
+@keyframes finishReadingOut {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(-50%, 10px);
+    }
+}
+
+@keyframes transitionFadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes transitionFadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+@keyframes bookScreenExit {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(1.015);
+    }
+}
+
+@keyframes endingScreenEnter {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes endingSmallIn {
+    0% {
+        opacity: 0;
+        transform: translateY(18px);
+        letter-spacing: 0.55em;
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        letter-spacing: 0.4em;
+    }
+}
+
+@keyframes endingTitleIn {
+    0% {
+        opacity: 0;
+        transform: translateY(28px) scale(0.97);
+        filter: blur(9px);
+    }
+
+    65% {
+        opacity: 1;
+        filter: blur(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+@keyframes endingDividerIn {
+    0% {
+        opacity: 0;
+        transform: scaleX(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scaleX(1);
+    }
+}
+
+@keyframes endingNameIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.94);
+        filter: blur(7px);
+    }
+
+    60% {
+        opacity: 1;
+        filter: blur(0);
+    }
+
+    100% {
+        opacity: 0.9;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+@keyframes endingGlowOne {
+    0% {
+        transform: translate3d(-8%, -5%, 0) scale(0.85);
+    }
+
+    100% {
+        transform: translate3d(10%, 8%, 0) scale(1.15);
+    }
+}
+
+@keyframes endingGlowTwo {
+    0% {
+        transform: translate3d(8%, 8%, 0) scale(1);
+    }
+
+    100% {
+        transform: translate3d(-8%, -10%, 0) scale(0.85);
+    }
+}
+
+@keyframes endingGlowThree {
+    0% {
+        transform: translate3d(0, 0, 0) scale(0.8);
+    }
+
+    100% {
+        transform: translate3d(10%, -8%, 0) scale(1.25);
+    }
+}
+
+@keyframes endingParticleFloat {
+    0% {
+        opacity: 0;
+        transform: translate3d(0, 20px, 0) scale(0.5);
+    }
+
+    15% {
+        opacity: 0.5;
+    }
+
+    50% {
+        opacity: 0.25;
+        transform: translate3d(var(--particle-x, 20px), var(--particle-y, -60px), 0) scale(1);
+    }
+
+    85% {
+        opacity: 0.35;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate3d(
+            calc(var(--particle-x, 20px) * 1.4),
+            calc(var(--particle-y, -60px) * 1.7),
+            0
+        ) scale(0.4);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 1ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 1ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+@media (max-aspect-ratio: 1.25/1) {
+    :root {
+        --book-width: min(86vw, 900px);
+        --book-height: min(58vh, 620px);
+    }
+
+    .book-interface {
+        padding-left: 3vw;
+        padding-right: 3vw;
+    }
+
+    .book-stage {
+        max-width: calc(100vw - 28px);
+        max-height: calc(100vh - 150px);
+    }
+
+    .cover-name {
+        font-size: clamp(30px, 5vw, 58px);
+    }
+
+    .intro-content {
+        width: min(88vw, 650px);
+    }
+}
+
+@media (max-aspect-ratio: 1/1) {
+    :root {
+        --book-width: min(90vw, 620px);
+        --book-height: min(70vh, 620px);
+    }
+
+    .book-interface {
+        padding-top: 80px;
+        padding-bottom: 70px;
+    }
+
+    .book-stage {
+        width: min(90vw, 620px);
+        height: min(70vh, 620px);
+        max-width: calc(100vw - 24px);
+        max-height: calc(100vh - 145px);
+    }
+
+    .book-top-label {
+        top: 26px;
+    }
+
+    .book-top-label span:nth-child(2) {
+        font-size: 7px;
+        letter-spacing: 0.3em;
+    }
+
+    .book-top-line {
+        width: 24px;
+    }
+
+    .finish-reading {
+        bottom: 24px;
+    }
+
+    .music-indicator {
+        right: 18px;
+        bottom: 25px;
+    }
+
+    .book-progress {
+        bottom: 28px;
+    }
+
+    .floating-word-one {
+        top: 14%;
+        left: 2%;
+    }
+
+    .floating-word-two {
+        right: 1%;
+        bottom: 15%;
+    }
+
+    .floating-word-three {
+        top: 10%;
+        right: 8%;
+    }
+}
+
+@media (max-aspect-ratio: 4/5) {
+    :root {
+        --book-width: min(92vw, 560px);
+        --book-height: min(67vh, 590px);
+    }
+
+    .book-interface {
+        padding-top: 72px;
+        padding-bottom: 74px;
+    }
+
+    .book-stage {
+        width: min(92vw, 560px);
+        height: min(67vh, 590px);
+        max-width: calc(100vw - 18px);
+        max-height: calc(100vh - 138px);
+    }
+
+    .cover-content {
+        padding: 7%;
+    }
+
+    .cover-mini-title {
+        margin-bottom: 12px;
+        font-size: 6px;
+    }
+
+    .cover-symbol {
+        gap: 7px;
+        margin-bottom: 11px;
+    }
+
+    .cover-symbol span {
+        width: 22px;
+    }
+
+    .cover-name {
+        font-size: clamp(25px, 8vw, 46px);
+    }
+
+    .cover-date {
+        margin-top: 12px;
+        font-size: 6px;
+    }
+
+    .page-number {
+        font-size: 8px;
+    }
+
+    .intro-eyebrow {
+        margin-bottom: 20px;
+        font-size: 7px;
+    }
+
+    .intro-eyebrow span {
+        width: 25px;
+    }
+
+    .intro-title {
+        font-size: clamp(43px, 13vw, 70px);
+    }
+
+    .intro-divider {
+        margin-top: 24px;
+        margin-bottom: 18px;
+    }
+
+    .intro-description {
+        max-width: 280px;
+        font-size: 16px;
+    }
+
+    .open-button {
+        width: 112px;
+        height: 112px;
+        margin-top: 34px;
+    }
+
+    .open-button-content {
+        width: 72px;
+        height: 72px;
+    }
+
+    .intro-footnote {
+        margin-top: 28px;
+    }
+
+    .ending-title {
+        font-size: clamp(48px, 14vw, 76px);
+    }
+
+    .ending-name {
+        font-size: clamp(44px, 13vw, 72px);
+    }
+}
+
+@media (max-aspect-ratio: 3/5) {
+    :root {
+        --book-width: min(94vw, 480px);
+        --book-height: min(62vh, 520px);
+    }
+
+    .book-interface {
+        padding-top: 68px;
+        padding-bottom: 78px;
+    }
+
+    .book-stage {
+        width: min(94vw, 480px);
+        height: min(62vh, 520px);
+        max-width: calc(100vw - 12px);
+        max-height: calc(100vh - 132px);
+    }
+
+    .book-top-label {
+        top: 22px;
+    }
+
+    .finish-reading {
+        bottom: 20px;
+    }
+
+    .finish-reading-inner {
+        padding: 9px 14px;
+    }
+
+    .finish-reading-text {
+        font-size: 6px;
+        letter-spacing: 0.24em;
+    }
+
+    .music-indicator {
+        display: none;
+    }
+
+    .book-progress {
+        bottom: 22px;
+    }
+
+    .cover-mini-title {
+        display: none;
+    }
+
+    .cover-date {
+        display: none;
+    }
+
+    .cover-symbol {
+        margin-bottom: 10px;
+    }
+
+    .cover-name {
+        font-size: clamp(22px, 8vw, 38px);
+    }
+
+    .page-number {
+        bottom: 3%;
+    }
+}
+
+@media (max-width: 700px) {
+    .intro-content {
+        width: calc(100vw - 42px);
+    }
+
+    .intro-eyebrow {
+        gap: 10px;
+        font-size: 7px;
+        letter-spacing: 0.28em;
+    }
+
+    .intro-eyebrow span {
+        width: 22px;
+    }
+
+    .intro-description {
+        max-width: 300px;
+    }
+
+    .book-top-label {
+        gap: 10px;
+    }
+
+    .book-top-line {
+        width: 20px;
+    }
+
+    .book-stage {
+        max-width: calc(100vw - 12px);
+    }
+
+    .cover-corner {
+        width: 7%;
+        height: 7%;
+    }
+
+    .floating-word {
+        opacity: 0.55;
+    }
+
+    .vignette-layer {
+        background:
+            radial-gradient(
+                ellipse at center,
+                transparent 30%,
+                rgba(0, 0, 0, 0.28) 70%,
+                rgba(0, 0, 0, 0.72) 115%
+            );
+    }
+
+    .ending-content {
+        width: calc(100vw - 40px);
+    }
+}
+
+@media (max-width: 480px) {
+    .preloader-inner {
+        width: 140px;
+    }
+
+    .intro-eyebrow {
+        margin-bottom: 17px;
+        font-size: 6px;
+    }
+
+    .intro-title {
+        font-size: 48px;
+    }
+
+    .intro-divider {
+        width: 145px;
+        margin-top: 21px;
+        margin-bottom: 17px;
+    }
+
+    .intro-description {
+        font-size: 15px;
+        max-width: 270px;
+    }
+
+    .open-button {
+        width: 104px;
+        height: 104px;
+        margin-top: 31px;
+    }
+
+    .open-button-content {
+        width: 68px;
+        height: 68px;
+    }
+
+    .open-button-label {
+        font-size: 8px;
+    }
+
+    .open-button-arrow {
+        font-size: 16px;
+    }
+
+    .intro-footnote {
+        margin-top: 25px;
+        font-size: 6px;
+        letter-spacing: 0.28em;
+    }
+
+    .book-stage {
+        width: calc(100vw - 12px);
+        max-width: calc(100vw - 12px);
+    }
+
+    .book-top-label span:nth-child(2) {
+        font-size: 6px;
+    }
+
+    .page-number {
+        display: none;
+    }
+
+    .cover-corner {
+        opacity: 0.3;
+    }
+
+    .ending-small {
+        font-size: 6px;
+        gap: 9px;
+        margin-bottom: 22px;
+    }
+
+    .ending-small span {
+        width: 20px;
+    }
+
+    .ending-title {
+        font-size: 53px;
+    }
+
+    .ending-divider {
+        width: 145px;
+        margin-top: 25px;
+    }
+
+    .ending-name {
+        margin-top: 20px;
+        font-size: 55px;
+    }
+}
+
+@media (max-height: 700px) and (min-width: 701px) {
+    :root {
+        --book-height: min(70vh, 540px);
+    }
+
+    .book-interface {
+        padding-top: 45px;
+        padding-bottom: 55px;
+    }
+
+    .book-top-label {
+        top: 18px;
+    }
+
+    .finish-reading {
+        bottom: 17px;
+    }
+
+    .music-indicator {
+        bottom: 19px;
+    }
+
+    .book-progress {
+        bottom: 20px;
+    }
+
+    .intro-description {
+        font-size: 15px;
+    }
+
+    .open-button {
+        margin-top: 27px;
+        width: 105px;
+        height: 105px;
+    }
+
+    .intro-footnote {
+        margin-top: 22px;
+    }
+}
+
+@media (min-aspect-ratio: 2.2/1) {
+    :root {
+        --book-width: min(66vw, 1080px);
+        --book-height: min(72vh, 650px);
+    }
+
+    .book-stage {
+        max-width: calc(100vw - 120px);
+    }
+
+    .intro-title {
+        font-size: clamp(54px, 6vw, 88px);
+    }
+}
+
+@media (min-aspect-ratio: 2.8/1) {
+    :root {
+        --book-width: min(58vw, 1040px);
+        --book-height: min(70vh, 610px);
+    }
+
+    .book-interface {
+        padding-top: 65px;
+        padding-bottom: 65px;
+    }
+}
+
+@media (pointer: coarse) {
+    .open-button:hover .open-button-ring {
+        transform: none;
+        border-color: rgba(255, 255, 255, 0.17);
+        box-shadow: none;
+    }
+
+    .open-button:hover .open-button-glow {
+        transform: none;
+        opacity: 0.8;
+    }
+
+    .open-button:hover .open-button-content {
+        transform: none;
+        background: rgba(255, 255, 255, 0.015);
+    }
+
+    .open-button:hover .open-button-arrow {
+        transform: none;
+    }
+
+    .finish-reading:hover .finish-reading-inner {
+        transform: none;
+        border-color: rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.015);
+    }
+
+    .finish-reading:hover .finish-reading-glow {
+        opacity: 0;
+    }
+
+    .book:hover .cover-image {
+        transform: scale(1.015);
+        filter:
+            saturate(0.82)
+            contrast(1.05)
+            brightness(0.78);
+    }
+
+    .cursor-glow {
+        display: none;
+    }
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .book-page {
+        cursor: pointer;
+    }
+
+    .book-cover-front,
+    .book-cover-back {
+        cursor: pointer;
+    }
+
+    .book-page:hover .page-highlight {
+        opacity: 1;
+    }
+
+    .book-page:hover .page-image {
+        filter:
+            saturate(0.92)
+            contrast(1.025)
+            brightness(1);
+        transition:
+            filter 500ms ease;
+    }
+}
+
+@media (orientation: portrait) {
+    .book-screen {
+        perspective: 1400px;
+    }
+
+    .book-stage {
+        perspective: 1800px;
+    }
+}
+
+@media (orientation: landscape) {
+    .book-screen {
+        perspective: 2200px;
+    }
+
+    .book-stage {
+        perspective: 2600px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cursor-glow,
+    .floating-word,
+    .aurora,
+    .ambient-glow,
+    .grain-layer {
+        animation: none !important;
+    }
+
+    .intro-content,
+    .book-stage,
+    .ending-content {
+        transform: none !important;
+    }
+}
+
+@supports not (height: 100dvh) {
+    .screen,
+    #app,
+    #main {
+        min-height: 100vh;
+        height: 100vh;
+    }
+}
+
+@supports (padding: env(safe-area-inset-top)) {
+    .book-interface {
+        padding-top: max(5vh, env(safe-area-inset-top));
+        padding-bottom: max(4vh, env(safe-area-inset-bottom));
+        padding-left: max(5vw, env(safe-area-inset-left));
+        padding-right: max(5vw, env(safe-area-inset-right));
+    }
+
+    .finish-reading {
+        bottom: max(24px, env(safe-area-inset-bottom));
+    }
+
+    .music-indicator {
+        right: max(20px, env(safe-area-inset-right));
+        bottom: max(22px, env(safe-area-inset-bottom));
+    }
+
+    .book-progress {
+        bottom: max(25px, env(safe-area-inset-bottom));
+    }
+    }
