@@ -1,0 +1,795 @@
+.screen {
+    transition:
+        opacity 1200ms var(--ease-soft),
+        visibility 1200ms var(--ease-soft);
+}
+
+.intro-screen.active .intro-eyebrow {
+    animation: introEyebrowIn 1100ms var(--ease-soft) 550ms both;
+}
+
+.intro-screen.active .intro-title {
+    animation: introTitleIn 1500ms var(--ease-soft) 700ms both;
+}
+
+.intro-screen.active .intro-divider {
+    animation: introDividerIn 1100ms var(--ease-soft) 900ms both;
+}
+
+.intro-screen.active .intro-description {
+    animation: introDescriptionIn 1200ms var(--ease-soft) 1000ms both;
+}
+
+.intro-screen.active .open-button {
+    animation: introButtonIn 1300ms var(--ease-smooth) 1150ms both;
+}
+
+.intro-screen.active .intro-footnote {
+    animation: introFootnoteIn 1100ms var(--ease-soft) 1350ms both;
+}
+
+.book-screen.active .book-stage {
+    animation: bookStageIn 1600ms var(--ease-smooth) 150ms both;
+}
+
+.book-screen.active .book-shadow {
+    animation: bookShadowIn 1500ms var(--ease-smooth) 400ms both;
+}
+
+.book-screen.active .book-top-label {
+    animation: bookLabelIn 1200ms var(--ease-soft) 700ms both;
+}
+
+.book-screen.active .music-indicator {
+    animation: interfaceItemIn 1000ms var(--ease-soft) 950ms both;
+}
+
+.book-screen.active .book-progress {
+    animation: interfaceItemIn 1000ms var(--ease-soft) 1050ms both;
+}
+
+.book-screen.active .floating-word-one {
+    animation:
+        floatingWordIn 1800ms var(--ease-soft) 800ms both,
+        floatingOne 10000ms ease-in-out 2600ms infinite alternate;
+}
+
+.book-screen.active .floating-word-two {
+    animation:
+        floatingWordIn 1800ms var(--ease-soft) 1000ms both,
+        floatingTwo 12000ms ease-in-out 2800ms infinite alternate;
+}
+
+.book-screen.active .floating-word-three {
+    animation:
+        floatingWordIn 1600ms var(--ease-soft) 1200ms both,
+        floatingThree 9000ms ease-in-out 2500ms infinite alternate;
+}
+
+.book-screen.active .aurora-one {
+    animation: auroraOne 15000ms ease-in-out infinite alternate;
+}
+
+.book-screen.active .aurora-two {
+    animation: auroraTwo 18000ms ease-in-out infinite alternate;
+}
+
+.book-screen.active .aurora-three {
+    animation: auroraThree 13000ms ease-in-out infinite alternate;
+}
+
+.book-screen.active .glow-one {
+    animation: ambientGlowOne 11000ms ease-in-out infinite alternate;
+}
+
+.book-screen.active .glow-two {
+    animation: ambientGlowTwo 14000ms ease-in-out infinite alternate;
+}
+
+.book-screen.active .glow-three {
+    animation: ambientGlowThree 16000ms ease-in-out infinite alternate;
+}
+
+.ending-screen.active .ending-small {
+    animation: endingSmallIn 1100ms var(--ease-soft) 850ms both;
+}
+
+.ending-screen.active .ending-title {
+    animation: endingTitleIn 1600ms var(--ease-soft) 1050ms both;
+}
+
+.ending-screen.active .ending-divider {
+    animation: endingDividerIn 1100ms var(--ease-soft) 1350ms both;
+}
+
+.ending-screen.active .ending-name {
+    animation: endingNameIn 1800ms var(--ease-soft) 1500ms both;
+}
+
+.ending-screen.active .ending-glow-one {
+    animation: endingGlowOne 9000ms ease-in-out 2000ms infinite alternate;
+}
+
+.ending-screen.active .ending-glow-two {
+    animation: endingGlowTwo 11000ms ease-in-out 2400ms infinite alternate;
+}
+
+.ending-screen.active .ending-glow-three {
+    animation: endingGlowThree 7000ms ease-in-out 2800ms infinite alternate;
+}
+
+.ending-screen.active .ending-particles .ending-particle {
+    animation: endingParticleFloat var(--particle-duration, 8000ms) ease-in-out var(--particle-delay, 0ms) infinite;
+}
+
+.book[data-state="cover"] .book-cover-front {
+    transition:
+        transform 1500ms var(--ease-book),
+        filter 1500ms var(--ease-book);
+}
+
+.book[data-state="page-one"] .book-cover-front {
+    transition:
+        transform 1500ms var(--ease-book),
+        filter 1500ms var(--ease-book);
+}
+
+.book[data-state="page-two"] .book-cover-front {
+    transition:
+        transform 1500ms var(--ease-book),
+        filter 1500ms var(--ease-book);
+}
+
+.book[data-state="back-cover"] .book-cover-back {
+    transition:
+        transform 1500ms var(--ease-book),
+        filter 1500ms var(--ease-book);
+}
+
+.book-spread {
+    transition:
+        opacity 0ms linear 0ms,
+        visibility 0ms linear 0ms;
+}
+
+.book-page {
+    transition:
+        transform 1300ms var(--ease-book),
+        filter 1300ms var(--ease-book);
+}
+
+.book-cover-front .cover-image,
+.book-cover-back .cover-image {
+    transition:
+        transform 1600ms var(--ease-smooth),
+        filter 1200ms ease;
+}
+
+.book:hover .cover-image {
+    transform: scale(1.025);
+    filter:
+        saturate(0.86)
+        contrast(1.06)
+        brightness(0.82);
+}
+
+.book-cover-front::after,
+.book-cover-back::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 100;
+    pointer-events: none;
+    opacity: 0;
+    background:
+        linear-gradient(
+            105deg,
+            transparent 0%,
+            transparent 38%,
+            rgba(255, 255, 255, 0.09) 49%,
+            rgba(255, 255, 255, 0.025) 54%,
+            transparent 66%,
+            transparent 100%
+        );
+    transform: translateX(-120%);
+}
+
+.book[data-state="page-one"] .book-cover-front::after,
+.book[data-state="page-two"] .book-cover-front::after {
+    animation: pageTurnLight 1500ms var(--ease-soft) both;
+}
+
+.book[data-state="back-cover"] .book-cover-back::after {
+    animation: pageTurnLight 1500ms var(--ease-soft) both;
+}
+
+.book-page::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    pointer-events: none;
+    opacity: 0;
+    background:
+        linear-gradient(
+            90deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.1) 48%,
+            transparent 100%
+        );
+    transform: translateX(-120%);
+}
+
+.book-page.flipping::after {
+    animation: pageSurfaceLight 1100ms var(--ease-soft) both;
+}
+
+.book-page.active-page {
+    filter: brightness(1);
+}
+
+.book-page.inactive-page {
+    filter: brightness(0.82);
+}
+
+.finish-reading.visible {
+    visibility: visible;
+    pointer-events: auto;
+    animation: finishReadingIn 1200ms var(--ease-soft) both;
+}
+
+.finish-reading.hiding {
+    animation: finishReadingOut 500ms var(--ease-soft) both;
+}
+
+.music-indicator.visible {
+    opacity: 1;
+}
+
+.book-progress.visible {
+    opacity: 1;
+}
+
+.transition-overlay.active {
+    visibility: visible;
+    pointer-events: auto;
+    animation: transitionFadeIn 1800ms var(--ease-soft) forwards;
+}
+
+.transition-overlay.reverse {
+    animation: transitionFadeOut 1200ms var(--ease-soft) forwards;
+}
+
+.intro-screen.leaving .intro-content {
+    animation: introExit 1000ms var(--ease-soft) both;
+}
+
+.intro-screen.leaving .intro-light {
+    animation: introLightExit 1100ms var(--ease-soft) both;
+}
+
+.book-screen.leaving {
+    animation: bookScreenExit 1600ms var(--ease-soft) both;
+}
+
+.ending-screen.entering {
+    animation: endingScreenEnter 1800ms var(--ease-soft) both;
+}
+
+@keyframes introEyebrowIn {
+    0% {
+        opacity: 0;
+        transform: translateY(18px);
+        letter-spacing: 0.6em;
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        letter-spacing: 0.38em;
+    }
+}
+
+@keyframes introTitleIn {
+    0% {
+        opacity: 0;
+        transform: translateY(35px) scale(0.97);
+        filter: blur(8px);
+    }
+
+    55% {
+        opacity: 1;
+        filter: blur(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+@keyframes introDividerIn {
+    0% {
+        opacity: 0;
+        transform: scaleX(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scaleX(1);
+    }
+}
+
+@keyframes introDescriptionIn {
+    0% {
+        opacity: 0;
+        transform: translateY(15px);
+        filter: blur(4px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+
+@keyframes introButtonIn {
+    0% {
+        opacity: 0;
+        transform: translateY(24px) scale(0.78);
+    }
+
+    55% {
+        opacity: 1;
+        transform: translateY(-4px) scale(1.025);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes introFootnoteIn {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes introExit {
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-25px) scale(0.985);
+        filter: blur(5px);
+    }
+}
+
+@keyframes introLightExit {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(1.5);
+    }
+}
+
+@keyframes bookStageIn {
+    0% {
+        opacity: 0;
+        transform: translateY(35px) scale(0.94);
+        filter: blur(5px);
+    }
+
+    55% {
+        opacity: 1;
+        filter: blur(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+@keyframes bookShadowIn {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) scaleX(0.65);
+    }
+
+    100% {
+        opacity: 0.7;
+        transform: translateX(-50%) scaleX(1);
+    }
+}
+
+@keyframes bookLabelIn {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -12px);
+        letter-spacing: 0.5em;
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(-50%, 0);
+        letter-spacing: normal;
+    }
+}
+
+@keyframes interfaceItemIn {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes floatingWordIn {
+    0% {
+        opacity: 0;
+        filter: blur(8px);
+    }
+
+    100% {
+        opacity: 1;
+        filter: blur(0);
+    }
+}
+
+@keyframes floatingOne {
+    0% {
+        transform: translate3d(0, 0, 0) rotate(-12deg);
+    }
+
+    100% {
+        transform: translate3d(25px, -18px, 0) rotate(-8deg);
+    }
+}
+
+@keyframes floatingTwo {
+    0% {
+        transform: translate3d(0, 0, 0) rotate(10deg);
+    }
+
+    100% {
+        transform: translate3d(-22px, 15px, 0) rotate(6deg);
+    }
+}
+
+@keyframes floatingThree {
+    0% {
+        transform: translate3d(0, 0, 0) rotate(0deg);
+    }
+
+    100% {
+        transform: translate3d(-12px, 20px, 0) rotate(12deg);
+    }
+}
+
+@keyframes auroraOne {
+    0% {
+        transform: translate3d(-5%, -3%, 0) scale(0.95);
+    }
+
+    50% {
+        transform: translate3d(12%, 8%, 0) scale(1.08);
+    }
+
+    100% {
+        transform: translate3d(2%, 15%, 0) scale(1);
+    }
+}
+
+@keyframes auroraTwo {
+    0% {
+        transform: translate3d(6%, 5%, 0) scale(1);
+    }
+
+    50% {
+        transform: translate3d(-10%, -8%, 0) scale(1.12);
+    }
+
+    100% {
+        transform: translate3d(-2%, 5%, 0) scale(0.94);
+    }
+}
+
+@keyframes auroraThree {
+    0% {
+        transform: translate3d(0, 0, 0) scale(0.9);
+    }
+
+    50% {
+        transform: translate3d(7%, -8%, 0) scale(1.12);
+    }
+
+    100% {
+        transform: translate3d(-8%, 6%, 0) scale(0.98);
+    }
+}
+
+@keyframes ambientGlowOne {
+    0% {
+        transform: translate3d(-10%, 0, 0) scale(0.85);
+    }
+
+    100% {
+        transform: translate3d(10%, 8%, 0) scale(1.15);
+    }
+}
+
+@keyframes ambientGlowTwo {
+    0% {
+        transform: translate3d(8%, -8%, 0) scale(1);
+    }
+
+    100% {
+        transform: translate3d(-10%, 10%, 0) scale(0.8);
+    }
+}
+
+@keyframes ambientGlowThree {
+    0% {
+        transform: translate3d(0, 5%, 0) scale(0.9);
+    }
+
+    100% {
+        transform: translate3d(15%, -5%, 0) scale(1.1);
+    }
+}
+
+@keyframes pageTurnLight {
+    0% {
+        opacity: 0;
+        transform: translateX(-120%);
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateX(120%);
+    }
+}
+
+@keyframes pageSurfaceLight {
+    0% {
+        opacity: 0;
+        transform: translateX(-120%);
+    }
+
+    20% {
+        opacity: 0.8;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateX(120%);
+    }
+}
+
+@keyframes finishReadingIn {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, 18px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}
+
+@keyframes finishReadingOut {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(-50%, 10px);
+    }
+}
+
+@keyframes transitionFadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes transitionFadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+@keyframes bookScreenExit {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(1.015);
+    }
+}
+
+@keyframes endingScreenEnter {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes endingSmallIn {
+    0% {
+        opacity: 0;
+        transform: translateY(18px);
+        letter-spacing: 0.55em;
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        letter-spacing: 0.4em;
+    }
+}
+
+@keyframes endingTitleIn {
+    0% {
+        opacity: 0;
+        transform: translateY(28px) scale(0.97);
+        filter: blur(9px);
+    }
+
+    65% {
+        opacity: 1;
+        filter: blur(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+@keyframes endingDividerIn {
+    0% {
+        opacity: 0;
+        transform: scaleX(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scaleX(1);
+    }
+}
+
+@keyframes endingNameIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.94);
+        filter: blur(7px);
+    }
+
+    60% {
+        opacity: 1;
+        filter: blur(0);
+    }
+
+    100% {
+        opacity: 0.9;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+@keyframes endingGlowOne {
+    0% {
+        transform: translate3d(-8%, -5%, 0) scale(0.85);
+    }
+
+    100% {
+        transform: translate3d(10%, 8%, 0) scale(1.15);
+    }
+}
+
+@keyframes endingGlowTwo {
+    0% {
+        transform: translate3d(8%, 8%, 0) scale(1);
+    }
+
+    100% {
+        transform: translate3d(-8%, -10%, 0) scale(0.85);
+    }
+}
+
+@keyframes endingGlowThree {
+    0% {
+        transform: translate3d(0, 0, 0) scale(0.8);
+    }
+
+    100% {
+        transform: translate3d(10%, -8%, 0) scale(1.25);
+    }
+}
+
+@keyframes endingParticleFloat {
+    0% {
+        opacity: 0;
+        transform: translate3d(0, 20px, 0) scale(0.5);
+    }
+
+    15% {
+        opacity: 0.5;
+    }
+
+    50% {
+        opacity: 0.25;
+        transform: translate3d(var(--particle-x, 20px), var(--particle-y, -60px), 0) scale(1);
+    }
+
+    85% {
+        opacity: 0.35;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate3d(
+            calc(var(--particle-x, 20px) * 1.4),
+            calc(var(--particle-y, -60px) * 1.7),
+            0
+        ) scale(0.4);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 1ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 1ms !important;
+        scroll-behavior: auto !important;
+    }
+}
