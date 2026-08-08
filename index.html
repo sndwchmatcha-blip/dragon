@@ -1,79 +1,451 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Happy Birthday ❤️</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#000000">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Untuk Anindita">
+    <meta name="description" content="Untuk Anindita.">
+    <title>Untuk Anindita</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Italianno&display=swap" rel="stylesheet">
 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animation.css">
+    <link rel="stylesheet" href="css/responsive.css">
 </head>
 
 <body>
 
-<div id="intro" class="screen active">
-    <div class="content">
-        <h1>Happy Birthday</h1>
-        <p>A special surprise made with love.</p>
+    <div id="app">
 
-        <button id="openButton">
-            Open Gift 🎁
-        </button>
+        <div id="preloader" class="preloader">
+            <div class="preloader-inner">
+                <div class="preloader-symbol">♡</div>
+                <div class="preloader-line">
+                    <span></span>
+                </div>
+                <div class="preloader-text">sebentar...</div>
+            </div>
+        </div>
+
+        <div id="ambient-background" class="ambient-background">
+
+            <div class="aurora aurora-one"></div>
+            <div class="aurora aurora-two"></div>
+            <div class="aurora aurora-three"></div>
+
+            <div class="ambient-glow glow-one"></div>
+            <div class="ambient-glow glow-two"></div>
+            <div class="ambient-glow glow-three"></div>
+
+            <div id="particle-layer" class="particle-layer"></div>
+            <div id="heart-layer" class="heart-layer"></div>
+
+            <div class="grain-layer"></div>
+            <div class="vignette-layer"></div>
+
+        </div>
+
+        <main id="main">
+
+            <section id="intro-screen" class="screen intro-screen active">
+
+                <div class="intro-light"></div>
+
+                <div class="intro-content">
+
+                    <div class="intro-eyebrow">
+                        <span></span>
+                        sebuah cerita kecil
+                        <span></span>
+                    </div>
+
+                    <h1 class="intro-title">
+                        untuk
+                        <span>anindita</span>
+                    </h1>
+
+                    <div class="intro-divider">
+                        <span></span>
+                        <i>♡</i>
+                        <span></span>
+                    </div>
+
+                    <p class="intro-description">
+                        ada sesuatu yang ingin kuberikan kepadamu.
+                    </p>
+
+                    <button id="open-button" class="open-button" type="button" aria-label="Open">
+
+                        <span class="open-button-ring"></span>
+                        <span class="open-button-glow"></span>
+
+                        <span class="open-button-content">
+                            <span class="open-button-label">open</span>
+                            <span class="open-button-arrow">↗</span>
+                        </span>
+
+                    </button>
+
+                    <div class="intro-footnote">
+                        <span class="footnote-line"></span>
+                        <span>tap to begin</span>
+                        <span class="footnote-line"></span>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <section id="book-screen" class="screen book-screen">
+
+                <div class="book-atmosphere">
+
+                    <div class="book-halo"></div>
+                    <div class="book-halo book-halo-secondary"></div>
+
+                    <div class="floating-word floating-word-one">love</div>
+                    <div class="floating-word floating-word-two">always</div>
+                    <div class="floating-word floating-word-three">♡</div>
+
+                </div>
+
+                <div class="book-interface">
+
+                    <div id="book-top-label" class="book-top-label">
+                        <span class="book-top-line"></span>
+                        <span id="book-hint">tap to open</span>
+                        <span class="book-top-line"></span>
+                    </div>
+
+                    <div id="book-stage" class="book-stage">
+
+                        <div id="book-shadow" class="book-shadow"></div>
+
+                        <div id="book" class="book" data-state="cover">
+
+                            <div class="book-depth book-depth-1"></div>
+                            <div class="book-depth book-depth-2"></div>
+                            <div class="book-depth book-depth-3"></div>
+
+                            <div id="book-cover-front" class="book-cover book-cover-front">
+
+                                <div class="cover-surface">
+
+                                    <div class="cover-image-wrap">
+                                        <img
+                                            src="assets/foto1.jpg"
+                                            alt="Sampul buku"
+                                            class="cover-image"
+                                            draggable="false"
+                                        >
+                                    </div>
+
+                                    <div class="cover-light"></div>
+                                    <div class="cover-sheen"></div>
+                                    <div class="cover-texture"></div>
+
+                                    <div class="cover-content">
+
+                                        <div class="cover-mini-title">
+                                            a little story
+                                        </div>
+
+                                        <div class="cover-symbol">
+                                            <span></span>
+                                            <i>♡</i>
+                                            <span></span>
+                                        </div>
+
+                                        <div class="cover-name">
+                                            Anindita
+                                        </div>
+
+                                        <div class="cover-date">
+                                            with love
+                                        </div>
+
+                                    </div>
+
+                                    <div class="cover-corner cover-corner-tl"></div>
+                                    <div class="cover-corner cover-corner-tr"></div>
+                                    <div class="cover-corner cover-corner-bl"></div>
+                                    <div class="cover-corner cover-corner-br"></div>
+
+                                </div>
+
+                                <div class="cover-spine-shadow"></div>
+
+                            </div>
+
+                            <div id="page-stack" class="page-stack">
+
+                                <div class="page-edge page-edge-1"></div>
+                                <div class="page-edge page-edge-2"></div>
+                                <div class="page-edge page-edge-3"></div>
+                                <div class="page-edge page-edge-4"></div>
+
+                            </div>
+
+                            <div id="spread-one" class="book-spread spread-one">
+
+                                <div id="page-one-left" class="book-page page-left">
+
+                                    <div class="page-paper">
+
+                                        <div class="page-image-wrap">
+                                            <img
+                                                src="assets/foto2.jpg"
+                                                alt="Halaman satu kiri"
+                                                class="page-image"
+                                                draggable="false"
+                                            >
+                                        </div>
+
+                                        <div class="page-overlay"></div>
+                                        <div class="page-highlight"></div>
+
+                                        <div class="page-number page-number-left">
+                                            01
+                                        </div>
+
+                                    </div>
+
+                                    <div class="page-shadow-inner"></div>
+
+                                </div>
+
+                                <div id="page-one-right" class="book-page page-right">
+
+                                    <div class="page-paper">
+
+                                        <div class="page-image-wrap">
+                                            <img
+                                                src="assets/foto3.jpg"
+                                                alt="Halaman satu kanan"
+                                                class="page-image"
+                                                draggable="false"
+                                            >
+                                        </div>
+
+                                        <div class="page-overlay"></div>
+                                        <div class="page-highlight"></div>
+
+                                        <div class="page-number page-number-right">
+                                            02
+                                        </div>
+
+                                    </div>
+
+                                    <div class="page-shadow-inner"></div>
+
+                                </div>
+
+                            </div>
+
+                            <div id="spread-two" class="book-spread spread-two">
+
+                                <div id="page-two-left" class="book-page page-left">
+
+                                    <div class="page-paper">
+
+                                        <div class="page-image-wrap">
+                                            <img
+                                                src="assets/foto4.jpg"
+                                                alt="Halaman dua kiri"
+                                                class="page-image"
+                                                draggable="false"
+                                            >
+                                        </div>
+
+                                        <div class="page-overlay"></div>
+                                        <div class="page-highlight"></div>
+
+                                        <div class="page-number page-number-left">
+                                            03
+                                        </div>
+
+                                    </div>
+
+                                    <div class="page-shadow-inner"></div>
+
+                                </div>
+
+                                <div id="page-two-right" class="book-page page-right">
+
+                                    <div class="page-paper">
+
+                                        <div class="page-image-wrap">
+                                            <img
+                                                src="assets/foto5.jpg"
+                                                alt="Halaman dua kanan"
+                                                class="page-image"
+                                                draggable="false"
+                                            >
+                                        </div>
+
+                                        <div class="page-overlay"></div>
+                                        <div class="page-highlight"></div>
+
+                                        <div class="page-number page-number-right">
+                                            04
+                                        </div>
+
+                                    </div>
+
+                                    <div class="page-shadow-inner"></div>
+
+                                </div>
+
+                            </div>
+
+                            <div id="book-cover-back" class="book-cover book-cover-back">
+
+                                <div class="cover-surface">
+
+                                    <div class="cover-image-wrap">
+                                        <img
+                                            src="assets/foto1.jpg"
+                                            alt="Sampul penutup buku"
+                                            class="cover-image"
+                                            draggable="false"
+                                        >
+                                    </div>
+
+                                    <div class="cover-light"></div>
+                                    <div class="cover-sheen"></div>
+                                    <div class="cover-texture"></div>
+
+                                    <div class="cover-content cover-content-back">
+
+                                        <div class="cover-symbol">
+                                            <span></span>
+                                            <i>♡</i>
+                                            <span></span>
+                                        </div>
+
+                                        <div class="cover-name">
+                                            Anindita
+                                        </div>
+
+                                    </div>
+
+                                    <div class="cover-corner cover-corner-tl"></div>
+                                    <div class="cover-corner cover-corner-tr"></div>
+                                    <div class="cover-corner cover-corner-bl"></div>
+                                    <div class="cover-corner cover-corner-br"></div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="book-spine"></div>
+
+                        </div>
+
+                    </div>
+
+                    <button id="finish-reading" class="finish-reading" type="button">
+
+                        <span class="finish-reading-glow"></span>
+
+                        <span class="finish-reading-inner">
+                            <span class="finish-reading-icon">♡</span>
+                            <span class="finish-reading-text">selesai membaca</span>
+                        </span>
+
+                    </button>
+
+                </div>
+
+                <div id="music-indicator" class="music-indicator">
+
+                    <span class="music-icon">
+                        <i></i>
+                        <i></i>
+                        <i></i>
+                        <i></i>
+                    </span>
+
+                    <span class="music-label">music</span>
+
+                </div>
+
+                <div id="book-progress" class="book-progress">
+
+                    <span class="progress-dot active"></span>
+                    <span class="progress-line"></span>
+                    <span class="progress-dot"></span>
+                    <span class="progress-line"></span>
+                    <span class="progress-dot"></span>
+                    <span class="progress-line"></span>
+                    <span class="progress-dot"></span>
+
+                </div>
+
+            </section>
+
+            <section id="ending-screen" class="screen ending-screen">
+
+                <div class="ending-background">
+
+                    <div class="ending-glow ending-glow-one"></div>
+                    <div class="ending-glow ending-glow-two"></div>
+                    <div class="ending-glow ending-glow-three"></div>
+
+                    <div id="ending-particles" class="ending-particles"></div>
+
+                </div>
+
+                <div class="ending-content">
+
+                    <div class="ending-small">
+                        <span></span>
+                        forever
+                        <span></span>
+                    </div>
+
+                    <h2 class="ending-title">
+                        i love you
+                    </h2>
+
+                    <div class="ending-divider">
+                        <span></span>
+                        <i>♡</i>
+                        <span></span>
+                    </div>
+
+                    <div class="ending-name">
+                        anindita
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+        <div id="transition-overlay" class="transition-overlay"></div>
+
+        <div id="cursor-glow" class="cursor-glow"></div>
+
+        <audio id="background-music" preload="auto">
+            <source src="assets/music.mp3" type="audio/mpeg">
+        </audio>
+
     </div>
-</div>
 
-<div id="main" class="hidden">
-
-    <header>
-        <h2>Happy Birthday ❤️</h2>
-    </header>
-
-    <section class="hero">
-
-        <img
-            src="assets/photos/foto1.jpg"
-            alt="Birthday">
-
-        <h1>To Someone Special</h1>
-
-        <p>
-            Every moment with you is a beautiful memory.
-        </p>
-
-    </section>
-
-    <section class="gallery">
-
-        <img src="assets/photos/foto2.jpg">
-        <img src="assets/photos/foto3.jpg">
-        <img src="assets/photos/foto4.jpg">
-        <img src="assets/photos/foto5.jpg">
-        <img src="assets/photos/foto6.jpg">
-        <img src="assets/photos/foto7.jpg">
-
-    </section>
-
-    <section class="message">
-
-        <h2>My Wishes</h2>
-
-        <p id="typing"></p>
-
-    </section>
-
-</div>
-
-<audio
-id="music"
-loop
-src="assets/music/music.mp3">
-</audio>
-
-<script src="script.js"></script>
+    <script src="js/main.js" defer></script>
+    <script src="js/background.js" defer></script>
+    <script src="js/music.js" defer></script>
+    <script src="js/book.js" defer></script>
+    <script src="js/ending.js" defer></script>
 
 </body>
-</html>
+  </html>
