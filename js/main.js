@@ -1,656 +1,618 @@
 (() => {
     "use strict";
 
-    const APP = {
-        screens: {
-            intro: document.querySelector(".intro-screen"),
-            book: document.querySelector(".book-screen"),
-            ending: document.querySelector(".ending-screen")
+    const App = {
+        initialized: false,
+        phase: "opening",
+        transitioning: false,
+
+        elements: {
+            opening: null,
+            openButton: null,
+            bookScreen: null,
+            bookStage: null,
+            finishButton: null,
+            ending: null,
+            loading: null,
+            audio: null
         },
 
-        controls: {
-            open: document.querySelector(".open-button"),
-            finish: document.querySelector(".finish-reading"),
-            music: document.querySelector(".music-indicator")
-        },
-
-        book: {
-            root: document.querySelector(".book"),
-            stage: document.querySelector(".book-stage"),
-            pages: document.querySelectorAll(".book-page"),
-            coverFront: document.querySelector(".book-cover-front"),
-            coverBack: document.querySelector(".book-cover-back")
-        },
-
-        overlay: document.querySelector(".transition-overlay"),
-
-        state: {
-            currentScreen: "intro",
-            bookState: "cover",
-            transitioning: false,
-            initialized: false,
-            ending: false
+        config: {
+            openingDuration: 1200,
+            phaseTransitionDuration: 1500,
+            bookRevealDuration: 1100
         }
     };
 
-    const CONFIG = {
-        transitions: {
-            introToBook: 1150,
-            bookToEnding: 1800,
-            pageFlip: 1350,
-            fade: 1200
-        },
-
-        selectors: {
-            active: "active",
-            leaving: "leaving",
-            entering: "entering"
-        }
-    };
-
-    function wait(duration) {
-        return new Promise(resolve => {
-            window.setTimeout(resolve, duration);
-        });
+    function query(selector) {
+        return document.querySelector(selector);
     }
 
-    function hasElement(element) {
-        return element instanceof Element;
+    function cacheElements() {
+        App.elements.opening =
+            query(".opening-screen");
+
+        App.elements.openButton =
+            query(".open-button");
+
+        App.elements.bookScreen =
+            query(".book-screen");
+
+        App.elements.bookStage =
+            query(".book-stage");
+
+        App.elements.finishButton =
+            query(".finish-reading");
+
+        App.elements.ending =
+            query(".ending-screen");
+
+        App.elements.loading =
+            query(".loading-screen");
+
+        App.elements.audio =
+            query("#background-music");
     }
 
-    function setActiveScreen(name) {
-        Object.entries(APP.screens).forEach(([key, screen]) => {
-            if (!hasElement(screen)) {
-                return;
-            }
-
-            screen.classList.toggle(
-                CONFIG.selectors.active,
-                key === name
-            );
-        });
-
-        APP.state.currentScreen = name;
-    }
-
-    function prepareScreen(name) {
-        const screen = APP.screens[name];
-
-        if (!hasElement(screen)) {
-            return;
-        }
-
-        screen.classList.remove(
-            CONFIG.selectors.leaving,
-            CONFIG.selectors.entering
-        );
-
-        void screen.offsetWidth;
-
-        screen.classList.add(CONFIG.selectors.entering);
-    }
-
-    function leaveScreen(name) {
-        const screen = APP.screens[name];
-
-        if (!hasElement(screen)) {
-            return;
-        }
-
-        screen.classList.remove(CONFIG.selectors.entering);
-        screen.classList.add(CONFIG.selectors.leaving);
-    }
-
-    function removeTransitionClasses() {
-        Object.values(APP.screens).forEach(screen => {
-            if (!hasElement(screen)) {
-                return;
-            }
-
-            screen.classList.remove(
-                CONFIG.selectors.leaving,
-                CONFIG.selectors.entering
-            );
-        });
-    }
-
-    function lockInteraction() {
-        APP.state.transitioning = true;
-
-        document.documentElement.classList.add("is-transitioning");
-        document.body.classList.add("is-transitioning");
-    }
-
-    function unlockInteraction() {
-        APP.state.transitioning = false;
-
-        document.documentElement.classList.remove("is-transitioning");
-        document.body.classList.remove("is-transitioning");
-    }
-
-    function activateOverlay() {
-        if (!hasElement(APP.overlay)) {
-            return;
-        }
-
-        APP.overlay.classList.remove("reverse");
-        APP.overlay.classList.add("active");
-    }
-
-    function deactivateOverlay() {
-        if (!hasElement(APP.overlay)) {
-            return;
-        }
-
-        APP.overlay.classList.remove("active");
-        APP.overlay.classList.add("reverse");
-    }
-
-    function setBookState(state) {
-        if (!hasElement(APP.book.root)) {
-            return;
-        }
-
-        APP.state.bookState = state;
-
-        APP.book.root.dataset.state = state;
-
-        APP.book.root.classList.remove(
-            "state-cover",
-            "state-page-one",
-            "state-page-two",
-            "state-back-cover"
-        );
-
-        APP.book.root.classList.add(`state-${state}`);
-
-        updateBookInterface(state);
-    }
-
-    function updateBookInterface(state) {
-        const progress = document.querySelector(".book-progress");
-        const progressCurrent = document.querySelector(".book-progress-current");
-        const progressTotal = document.querySelector(".book-progress-total");
-
-        if (hasElement(progress)) {
-            progress.dataset.state = state;
-            progress.classList.add("visible");
-        }
-
-        if (!hasElement(progressCurrent)) {
-            return;
-        }
-
-        const values = {
-            cover: "01",
-            "page-one": "01",
-            "page-two": "02",
-            "back-cover": "03"
-        };
-
-        progressCurrent.textContent = values[state] || "01";
-
-        if (hasElement(progressTotal)) {
-            progressTotal.textContent = "03";
-        }
-    }
-
-    function clearPageAnimation() {
-        APP.book.pages.forEach(page => {
-            page.classList.remove(
-                "flipping",
-                "active-page",
-                "inactive-page"
-            );
-        });
-    }
-
-    function animateBookTransition(from, to) {
-        if (!hasElement(APP.book.root)) {
-            return Promise.resolve();
-        }
-
-        clearPageAnimation();
-
-        APP.book.root.dataset.previousState = from;
-        APP.book.root.dataset.nextState = to;
-
-        APP.book.root.classList.add("is-flipping");
-
-        const direction =
-            getStateIndex(to) > getStateIndex(from)
-                ? "forward"
-                : "backward";
-
-        APP.book.root.classList.remove(
-            "flip-forward",
-            "flip-backward"
-        );
-
-        APP.book.root.classList.add(`flip-${direction}`);
-
-        APP.book.pages.forEach(page => {
-            page.classList.add("flipping");
-        });
-
-        return wait(CONFIG.transitions.pageFlip).then(() => {
-            APP.book.root.classList.remove(
-                "is-flipping",
-                "flip-forward",
-                "flip-backward"
-            );
-
-            clearPageAnimation();
-            setBookState(to);
-        });
-    }
-
-    function getStateIndex(state) {
-        const order = {
-            cover: 0,
-            "page-one": 1,
-            "page-two": 2,
-            "back-cover": 3
-        };
-
-        return order[state] ?? 0;
-    }
-
-    async function openBook() {
-        if (
-            APP.state.transitioning ||
-            APP.state.currentScreen !== "intro"
-        ) {
-            return;
-        }
-
-        lockInteraction();
-
-        const intro = APP.screens.intro;
-
-        if (hasElement(intro)) {
-            intro.classList.add(CONFIG.selectors.leaving);
-        }
-
-        await wait(220);
-
-        startMusic();
-
-        prepareScreen("book");
-        setActiveScreen("book");
-        setBookState("cover");
-
-        await wait(CONFIG.transitions.introToBook);
-
-        removeTransitionClasses();
-        unlockInteraction();
-    }
-
-    async function changeBookPage(targetState) {
-        if (
-            APP.state.transitioning ||
-            APP.state.currentScreen !== "book" ||
-            APP.state.bookState === targetState
-        ) {
-            return;
-        }
-
-        const currentState = APP.state.bookState;
-
-        lockInteraction();
-
-        await animateBookTransition(
-            currentState,
-            targetState
-        );
-
-        unlockInteraction();
-    }
-
-    async function finishReading() {
-        if (
-            APP.state.transitioning ||
-            APP.state.currentScreen !== "book" ||
-            APP.state.bookState !== "back-cover"
-        ) {
-            return;
-        }
-
-        lockInteraction();
-        APP.state.ending = true;
-
-        const finishButton = APP.controls.finish;
-
-        if (hasElement(finishButton)) {
-            finishButton.classList.add("hiding");
-        }
-
-        stopMusic();
-
-        await wait(400);
-
-        leaveScreen("book");
-        activateOverlay();
-
-        await wait(650);
-
-        prepareScreen("ending");
-        setActiveScreen("ending");
-
-        await wait(CONFIG.transitions.bookToEnding);
-
-        deactivateOverlay();
-        removeTransitionClasses();
-
-        unlockInteraction();
-    }
-
-    function startMusic() {
-        if (
-            window.MusicController &&
-            typeof window.MusicController.start === "function"
-        ) {
-            window.MusicController.start();
-            return;
-        }
-
-        const audio = document.querySelector("audio");
-
-        if (!audio) {
-            return;
-        }
-
-        audio.currentTime = 21;
-
-        const playPromise = audio.play();
-
-        if (playPromise instanceof Promise) {
-            playPromise.catch(() => {});
-        }
-    }
-
-    function stopMusic() {
-        if (
-            window.MusicController &&
-            typeof window.MusicController.stop === "function"
-        ) {
-            window.MusicController.stop();
-            return;
-        }
-
-        const audio = document.querySelector("audio");
-
-        if (!audio) {
-            return;
-        }
-
-        audio.pause();
-    }
-
-    function handleBookClick(event) {
-        if (
-            APP.state.transitioning ||
-            APP.state.currentScreen !== "book"
-        ) {
-            return;
-        }
-
-        const target = event.target;
-
-        if (!(target instanceof Element)) {
-            return;
-        }
-
-        const page = target.closest(".book-page");
-
-        if (page) {
-            const side = page.dataset.side;
-
-            if (
-                APP.state.bookState === "page-one" &&
-                side === "left"
-            ) {
-                changeBookPage("cover");
-                return;
-            }
-
-            if (
-                APP.state.bookState === "page-one" &&
-                side === "right"
-            ) {
-                changeBookPage("page-two");
-                return;
-            }
-
-            if (
-                APP.state.bookState === "page-two" &&
-                side === "left"
-            ) {
-                changeBookPage("page-one");
-                return;
-            }
-
-            if (
-                APP.state.bookState === "page-two" &&
-                side === "right"
-            ) {
-                changeBookPage("back-cover");
-                return;
-            }
-        }
-
-        const frontCover = target.closest(".book-cover-front");
-
-        if (
-            frontCover &&
-            APP.state.bookState === "cover"
-        ) {
-            changeBookPage("page-one");
-            return;
-        }
-
-        const backCover = target.closest(".book-cover-back");
-
-        if (
-            backCover &&
-            APP.state.bookState === "back-cover"
-        ) {
-            changeBookPage("page-two");
-        }
-    }
-
-    function handleKeyboard(event) {
-        if (APP.state.transitioning) {
-            return;
-        }
-
-        if (
-            event.key === "Enter" &&
-            APP.state.currentScreen === "intro"
-        ) {
-            openBook();
-            return;
-        }
-
-        if (APP.state.currentScreen !== "book") {
-            return;
-        }
-
-        if (event.key === "ArrowRight") {
-            const state = APP.state.bookState;
-
-            if (state === "cover") {
-                changeBookPage("page-one");
-            } else if (state === "page-one") {
-                changeBookPage("page-two");
-            } else if (state === "page-two") {
-                changeBookPage("back-cover");
-            }
-
-            return;
-        }
-
-        if (event.key === "ArrowLeft") {
-            const state = APP.state.bookState;
-
-            if (state === "back-cover") {
-                changeBookPage("page-two");
-            } else if (state === "page-two") {
-                changeBookPage("page-one");
-            } else if (state === "page-one") {
-                changeBookPage("cover");
-            }
-        }
-    }
-
-    function initializeBook() {
-        if (!hasElement(APP.book.root)) {
-            return;
-        }
-
-        setBookState("cover");
-
-        APP.book.root.classList.remove(
-            "is-flipping",
-            "flip-forward",
-            "flip-backward"
-        );
-
-        clearPageAnimation();
-    }
-
-    function initializeScreens() {
-        Object.values(APP.screens).forEach(screen => {
-            if (!hasElement(screen)) {
-                return;
-            }
-
-            screen.classList.remove(
-                CONFIG.selectors.active,
-                CONFIG.selectors.leaving,
-                CONFIG.selectors.entering
-            );
-        });
-
-        if (hasElement(APP.screens.intro)) {
-            APP.screens.intro.classList.add(
-                CONFIG.selectors.active
-            );
-        }
-
-        APP.state.currentScreen = "intro";
-    }
-
-    function initializeControls() {
-        if (hasElement(APP.controls.open)) {
-            APP.controls.open.addEventListener(
-                "click",
-                openBook
-            );
-        }
-
-        if (hasElement(APP.controls.finish)) {
-            APP.controls.finish.addEventListener(
-                "click",
-                finishReading
-            );
-        }
-
-        if (hasElement(APP.book.root)) {
-            APP.book.root.addEventListener(
-                "click",
-                handleBookClick
-            );
-        }
-
-        document.addEventListener(
-            "keydown",
-            handleKeyboard
-        );
-    }
-
-    function initializeAccessibility() {
-        if (hasElement(APP.controls.open)) {
-            APP.controls.open.setAttribute(
-                "role",
-                "button"
-            );
-
-            APP.controls.open.setAttribute(
-                "tabindex",
-                "0"
-            );
-
-            APP.controls.open.setAttribute(
-                "aria-label",
-                "Open the book"
-            );
-        }
-
-        if (hasElement(APP.controls.finish)) {
-            APP.controls.finish.setAttribute(
-                "role",
-                "button"
-            );
-
-            APP.controls.finish.setAttribute(
-                "tabindex",
-                "0"
-            );
-
-            APP.controls.finish.setAttribute(
-                "aria-label",
-                "Finish reading"
-            );
-        }
-
-        APP.book.pages.forEach(page => {
-            page.setAttribute("role", "button");
-            page.setAttribute("tabindex", "0");
-        });
-    }
-
-    function initialize() {
-        if (APP.state.initialized) {
-            return;
-        }
-
-        initializeScreens();
-        initializeBook();
-        initializeControls();
-        initializeAccessibility();
-
-        APP.state.initialized = true;
-
+    function lockScroll() {
         document.documentElement.classList.add(
-            "app-ready"
+            "is-locked"
         );
+
+        document.body.classList.add(
+            "is-locked"
+        );
+    }
+
+    function unlockScroll() {
+        document.documentElement.classList.remove(
+            "is-locked"
+        );
+
+        document.body.classList.remove(
+            "is-locked"
+        );
+    }
+
+    function setPhase(phase) {
+        App.phase = phase;
+
+        document.documentElement.dataset.phase =
+            phase;
+
+        document.body.dataset.phase =
+            phase;
+
+        if (
+            App.elements.opening
+        ) {
+            App.elements.opening.classList.toggle(
+                "phase-active",
+                phase === "opening"
+            );
+
+            App.elements.opening.classList.toggle(
+                "phase-hidden",
+                phase !== "opening"
+            );
+        }
+
+        if (
+            App.elements.bookScreen
+        ) {
+            App.elements.bookScreen.classList.toggle(
+                "phase-active",
+                phase === "book"
+            );
+
+            App.elements.bookScreen.classList.toggle(
+                "phase-hidden",
+                phase !== "book"
+            );
+        }
+
+        if (
+            App.elements.ending
+        ) {
+            App.elements.ending.classList.toggle(
+                "phase-active",
+                phase === "ending"
+            );
+
+            App.elements.ending.classList.toggle(
+                "phase-hidden",
+                phase !== "ending"
+            );
+        }
+    }
+
+    function prepareOpening() {
+        setPhase("opening");
+
+        lockScroll();
 
         document.body.classList.add(
             "app-ready"
         );
     }
 
-    window.BookApp = {
-        openBook,
-        changeBookPage,
-        finishReading,
-        startMusic,
-        stopMusic,
-        setBookState,
-        getState: () => ({
-            screen: APP.state.currentScreen,
-            book: APP.state.bookState,
-            transitioning: APP.state.transitioning,
-            ending: APP.state.ending
-        })
+    function prepareBook() {
+        if (
+            App.elements.bookScreen
+        ) {
+            App.elements.bookScreen.classList.add(
+                "entering"
+            );
+        }
+
+        setPhase("book");
+
+        window.setTimeout(
+            () => {
+                if (
+                    App.elements.bookScreen
+                ) {
+                    App.elements.bookScreen.classList.remove(
+                        "entering"
+                    );
+
+                    App.elements.bookScreen.classList.add(
+                        "entered"
+                    );
+                }
+
+                if (
+                    window.AuroraBackground
+                ) {
+                    window.AuroraBackground.resize();
+                }
+            },
+            App.config.bookRevealDuration
+        );
+    }
+
+    function playMusic() {
+        if (
+            window.MusicController &&
+            typeof window.MusicController.start ===
+                "function"
+        ) {
+            return window.MusicController.start();
+        }
+
+        const audio =
+            App.elements.audio;
+
+        if (!audio) {
+            return Promise.resolve();
+        }
+
+        audio.volume = 0;
+
+        try {
+            audio.currentTime = 21;
+        } catch {
+            audio.currentTime = 0;
+        }
+
+        const promise =
+            audio.play();
+
+        if (
+            promise &&
+            typeof promise.then ===
+                "function"
+        ) {
+            return promise
+                .then(() => {
+                    audio.volume = 0.72;
+                })
+                .catch(() => {});
+        }
+
+        audio.volume = 0.72;
+
+        return Promise.resolve();
+    }
+
+    function transitionToBook() {
+        if (
+            App.transitioning ||
+            App.phase !== "opening"
+        ) {
+            return;
+        }
+
+        App.transitioning = true;
+
+        if (
+            App.elements.openButton
+        ) {
+            App.elements.openButton.classList.add(
+                "is-pressed"
+            );
+
+            App.elements.openButton.setAttribute(
+                "aria-disabled",
+                "true"
+            );
+        }
+
+        playMusic();
+
+        if (
+            App.elements.opening
+        ) {
+            App.elements.opening.classList.add(
+                "is-opening"
+            );
+        }
+
+        window.setTimeout(
+            () => {
+                prepareBook();
+
+                window.setTimeout(
+                    () => {
+                        App.transitioning =
+                            false;
+
+                        if (
+                            App.elements.openButton
+                        ) {
+                            App.elements.openButton.removeAttribute(
+                                "aria-disabled"
+                            );
+                        }
+                    },
+                    App.config.bookRevealDuration
+                );
+            },
+            App.config.openingDuration
+        );
+    }
+
+    function setupOpenButton() {
+        const button =
+            App.elements.openButton;
+
+        if (!button) {
+            return;
+        }
+
+        button.setAttribute(
+            "role",
+            "button"
+        );
+
+        button.setAttribute(
+            "tabindex",
+            "0"
+        );
+
+        button.setAttribute(
+            "aria-label",
+            "Open"
+        );
+
+        button.addEventListener(
+            "click",
+            event => {
+                event.preventDefault();
+                transitionToBook();
+            }
+        );
+
+        button.addEventListener(
+            "keydown",
+            event => {
+                if (
+                    event.key !== "Enter" &&
+                    event.key !== " "
+                ) {
+                    return;
+                }
+
+                event.preventDefault();
+
+                transitionToBook();
+            }
+        );
+    }
+
+    function setupBookFinishBridge() {
+        if (
+            !App.elements.finishButton
+        ) {
+            return;
+        }
+
+        document.addEventListener(
+            "click",
+            event => {
+                const target =
+                    event.target instanceof Element
+                        ? event.target.closest(
+                              ".finish-reading"
+                          )
+                        : null;
+
+                if (!target) {
+                    return;
+                }
+
+                if (
+                    window.EndingController &&
+                    typeof window.EndingController.show ===
+                        "function"
+                ) {
+                    return;
+                }
+
+                transitionToEndingFallback();
+            },
+            true
+        );
+    }
+
+    function transitionToEndingFallback() {
+        if (
+            App.transitioning ||
+            App.phase === "ending"
+        ) {
+            return;
+        }
+
+        App.transitioning = true;
+
+        const finishButton =
+            App.elements.finishButton;
+
+        if (finishButton) {
+            finishButton.classList.add(
+                "hiding"
+            );
+        }
+
+        if (
+            window.MusicController
+        ) {
+            if (
+                typeof window.MusicController.stop ===
+                    "function"
+            ) {
+                window.MusicController.stop();
+            }
+        }
+
+        const overlay =
+            document.createElement("div");
+
+        overlay.className =
+            "ending-darkness";
+
+        document.body.appendChild(
+            overlay
+        );
+
+        requestAnimationFrame(
+            () => {
+                overlay.classList.add(
+                    "visible"
+                );
+            }
+        );
+
+        window.setTimeout(
+            () => {
+                setPhase("ending");
+
+                if (
+                    App.elements.ending
+                ) {
+                    App.elements.ending.classList.add(
+                        "visible"
+                    );
+                }
+
+                overlay.classList.remove(
+                    "visible"
+                );
+
+                overlay.classList.add(
+                    "fade-out"
+                );
+
+                window.setTimeout(
+                    () => {
+                        overlay.remove();
+                        App.transitioning =
+                            false;
+                    },
+                    1000
+                );
+            },
+            1200
+        );
+    }
+
+    function setupEndingObserver() {
+        if (
+            !App.elements.ending
+        ) {
+            return;
+        }
+
+        const observer =
+            new MutationObserver(
+                () => {
+                    if (
+                        App.elements.ending.classList.contains(
+                            "active"
+                        )
+                    ) {
+                        App.phase =
+                            "ending";
+
+                        document.documentElement.dataset.phase =
+                            "ending";
+
+                        document.body.dataset.phase =
+                            "ending";
+                    }
+                }
+            );
+
+        observer.observe(
+            App.elements.ending,
+            {
+                attributes: true,
+                attributeFilter: [
+                    "class"
+                ]
+            }
+        );
+    }
+
+    function setupPageLifecycle() {
+        window.addEventListener(
+            "pageshow",
+            () => {
+                if (
+                    App.phase ===
+                    "opening"
+                ) {
+                    prepareOpening();
+                }
+            }
+        );
+
+        window.addEventListener(
+            "pagehide",
+            () => {
+                if (
+                    window.AuroraBackground
+                ) {
+                    window.AuroraBackground.stop();
+                }
+            }
+        );
+    }
+
+    function setupResize() {
+        let resizeTimer = null;
+
+        window.addEventListener(
+            "resize",
+            () => {
+                window.clearTimeout(
+                    resizeTimer
+                );
+
+                resizeTimer =
+                    window.setTimeout(
+                        () => {
+                            if (
+                                window.AuroraBackground
+                            ) {
+                                window.AuroraBackground.resize();
+                            }
+                        },
+                        150
+                    );
+            },
+            {
+                passive: true
+            }
+        );
+
+        window.addEventListener(
+            "orientationchange",
+            () => {
+                window.setTimeout(
+                    () => {
+                        if (
+                            window.AuroraBackground
+                        ) {
+                            window.AuroraBackground.resize();
+                        }
+                    },
+                    250
+                );
+            },
+            {
+                passive: true
+            }
+        );
+    }
+
+    function preventContextSelection() {
+        document.addEventListener(
+            "dragstart",
+            event => {
+                const target =
+                    event.target;
+
+                if (
+                    target instanceof
+                        HTMLImageElement ||
+                    target instanceof
+                        HTMLAudioElement
+                ) {
+                    event.preventDefault();
+                }
+            }
+        );
+    }
+
+    function initialize() {
+        if (
+            App.initialized
+        ) {
+            return;
+        }
+
+        cacheElements();
+
+        prepareOpening();
+
+        setupOpenButton();
+        setupBookFinishBridge();
+        setupEndingObserver();
+        setupPageLifecycle();
+        setupResize();
+        preventContextSelection();
+
+        if (
+            window.AuroraBackground
+        ) {
+            window.AuroraBackground.start();
+        }
+
+        App.initialized = true;
+    }
+
+    window.AppController = {
+        getPhase: () =>
+            App.phase,
+
+        goToBook: () =>
+            transitionToBook(),
+
+        goToEnding: () =>
+            transitionToEndingFallback()
     };
 
-    if (document.readyState === "loading") {
+    if (
+        document.readyState ===
+        "loading"
+    ) {
         document.addEventListener(
             "DOMContentLoaded",
             initialize,
-            { once: true }
+            {
+                once: true
+            }
         );
     } else {
         initialize();
