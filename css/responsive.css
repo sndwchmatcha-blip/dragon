@@ -1,164 +1,109 @@
-@media (max-aspect-ratio: 1.25/1) {
-    :root {
-        --book-width: min(86vw, 900px);
-        --book-height: min(58vh, 620px);
-    }
-
-    .book-interface {
-        padding-left: 3vw;
-        padding-right: 3vw;
-    }
-
-    .book-stage {
-        max-width: calc(100vw - 28px);
-        max-height: calc(100vh - 150px);
-    }
-
-    .cover-name {
-        font-size: clamp(30px, 5vw, 58px);
-    }
-
-    .intro-content {
-        width: min(88vw, 650px);
-    }
+:root {
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-right: env(safe-area-inset-right, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-left: env(safe-area-inset-left, 0px);
 }
 
-@media (max-aspect-ratio: 1/1) {
+@media (max-width: 1200px) {
     :root {
-        --book-width: min(90vw, 620px);
-        --book-height: min(70vh, 620px);
+        --book-width: min(78vw, 980px);
+        --book-height: min(68vh, 620px);
     }
 
     .book-interface {
-        padding-top: 80px;
-        padding-bottom: 70px;
-    }
-
-    .book-stage {
-        width: min(90vw, 620px);
-        height: min(70vh, 620px);
-        max-width: calc(100vw - 24px);
-        max-height: calc(100vh - 145px);
-    }
-
-    .book-top-label {
-        top: 26px;
-    }
-
-    .book-top-label span:nth-child(2) {
-        font-size: 7px;
-        letter-spacing: 0.3em;
-    }
-
-    .book-top-line {
-        width: 24px;
-    }
-
-    .finish-reading {
-        bottom: 24px;
-    }
-
-    .music-indicator {
-        right: 18px;
-        bottom: 25px;
-    }
-
-    .book-progress {
-        bottom: 28px;
-    }
-
-    .floating-word-one {
-        top: 14%;
-        left: 2%;
-    }
-
-    .floating-word-two {
-        right: 1%;
-        bottom: 15%;
-    }
-
-    .floating-word-three {
-        top: 10%;
-        right: 8%;
-    }
-}
-
-@media (max-aspect-ratio: 4/5) {
-    :root {
-        --book-width: min(92vw, 560px);
-        --book-height: min(67vh, 590px);
-    }
-
-    .book-interface {
-        padding-top: 72px;
-        padding-bottom: 74px;
-    }
-
-    .book-stage {
-        width: min(92vw, 560px);
-        height: min(67vh, 590px);
-        max-width: calc(100vw - 18px);
-        max-height: calc(100vh - 138px);
-    }
-
-    .cover-content {
-        padding: 7%;
-    }
-
-    .cover-mini-title {
-        margin-bottom: 12px;
-        font-size: 6px;
-    }
-
-    .cover-symbol {
-        gap: 7px;
-        margin-bottom: 11px;
-    }
-
-    .cover-symbol span {
-        width: 22px;
-    }
-
-    .cover-name {
-        font-size: clamp(25px, 8vw, 46px);
-    }
-
-    .cover-date {
-        margin-top: 12px;
-        font-size: 6px;
-    }
-
-    .page-number {
-        font-size: 8px;
-    }
-
-    .intro-eyebrow {
-        margin-bottom: 20px;
-        font-size: 7px;
-    }
-
-    .intro-eyebrow span {
-        width: 25px;
+        padding-left: 30px;
+        padding-right: 30px;
     }
 
     .intro-title {
-        font-size: clamp(43px, 13vw, 70px);
+        font-size: clamp(48px, 8vw, 84px);
+    }
+
+    .cover-name {
+        font-size: clamp(30px, 5.5vw, 62px);
+    }
+}
+
+@media (max-width: 900px) {
+    :root {
+        --book-width: min(88vw, 820px);
+        --book-height: min(62vh, 540px);
+    }
+
+    .book-interface {
+        padding: 80px 20px 82px;
+    }
+
+    .book-stage {
+        max-width: calc(100vw - 32px);
+        max-height: calc(100vh - 160px);
+    }
+
+    .book-top-label {
+        top: max(22px, calc(var(--safe-top) + 18px));
+    }
+
+    .floating-word-one {
+        left: 3%;
+    }
+
+    .floating-word-two {
+        right: 3%;
+    }
+
+    .floating-word-three {
+        right: 12%;
+    }
+
+    .finish-reading {
+        bottom: max(20px, calc(var(--safe-bottom) + 18px));
+    }
+
+    .music-indicator {
+        right: max(18px, calc(var(--safe-right) + 18px));
+        bottom: max(20px, calc(var(--safe-bottom) + 18px));
+    }
+
+    .book-progress {
+        bottom: max(20px, calc(var(--safe-bottom) + 18px));
+    }
+}
+
+@media (max-width: 700px) {
+    :root {
+        --book-width: min(92vw, 680px);
+        --book-height: min(57vh, 440px);
+    }
+
+    .intro-content {
+        width: min(90vw, 520px);
+    }
+
+    .intro-eyebrow {
+        margin-bottom: 18px;
+        font-size: 7px;
+        letter-spacing: 0.28em;
+    }
+
+    .intro-title {
+        font-size: clamp(42px, 13vw, 68px);
     }
 
     .intro-divider {
-        margin-top: 24px;
+        margin-top: 22px;
         margin-bottom: 18px;
     }
 
     .intro-description {
-        max-width: 280px;
+        max-width: 300px;
         font-size: 16px;
     }
 
     .open-button {
         width: 112px;
         height: 112px;
-        margin-top: 34px;
+        margin-top: 32px;
     }
 
     .open-button-content {
@@ -167,46 +112,50 @@
     }
 
     .intro-footnote {
-        margin-top: 28px;
-    }
-
-    .ending-title {
-        font-size: clamp(48px, 14vw, 76px);
-    }
-
-    .ending-name {
-        font-size: clamp(44px, 13vw, 72px);
-    }
-}
-
-@media (max-aspect-ratio: 3/5) {
-    :root {
-        --book-width: min(94vw, 480px);
-        --book-height: min(62vh, 520px);
+        margin-top: 26px;
+        font-size: 6px;
+        letter-spacing: 0.28em;
     }
 
     .book-interface {
-        padding-top: 68px;
-        padding-bottom: 78px;
+        padding: 68px 12px 76px;
     }
 
     .book-stage {
-        width: min(94vw, 480px);
-        height: min(62vh, 520px);
-        max-width: calc(100vw - 12px);
-        max-height: calc(100vh - 132px);
+        width: var(--book-width);
+        height: var(--book-height);
+        max-width: calc(100vw - 24px);
+        max-height: calc(100vh - 145px);
     }
 
-    .book-top-label {
-        top: 22px;
+    .cover-content {
+        padding: 6%;
     }
 
-    .finish-reading {
-        bottom: 20px;
+    .cover-mini-title {
+        margin-bottom: 12px;
+        font-size: 6px;
+    }
+
+    .cover-symbol {
+        margin-bottom: 12px;
+    }
+
+    .cover-name {
+        font-size: clamp(25px, 7vw, 46px);
+    }
+
+    .cover-date {
+        margin-top: 13px;
+        font-size: 6px;
+    }
+
+    .page-number {
+        font-size: 8px;
     }
 
     .finish-reading-inner {
-        padding: 9px 14px;
+        padding: 10px 15px;
     }
 
     .finish-reading-text {
@@ -214,119 +163,89 @@
         letter-spacing: 0.24em;
     }
 
-    .music-indicator {
+    .music-label {
         display: none;
+    }
+
+    .music-indicator {
+        right: 16px;
     }
 
     .book-progress {
-        bottom: 22px;
+        gap: 6px;
     }
 
-    .cover-mini-title {
-        display: none;
+    .progress-line {
+        width: 11px;
     }
 
-    .cover-date {
-        display: none;
+    .floating-word-one {
+        top: 12%;
+        left: -2%;
     }
 
-    .cover-symbol {
-        margin-bottom: 10px;
+    .floating-word-two {
+        right: -4%;
+        bottom: 12%;
     }
 
-    .cover-name {
-        font-size: clamp(22px, 8vw, 38px);
+    .floating-word-three {
+        top: 9%;
+        right: 8%;
     }
 
-    .page-number {
-        bottom: 3%;
-    }
-}
-
-@media (max-width: 700px) {
-    .intro-content {
-        width: calc(100vw - 42px);
+    .aurora {
+        filter: blur(75px);
     }
 
-    .intro-eyebrow {
-        gap: 10px;
-        font-size: 7px;
-        letter-spacing: 0.28em;
+    .grain-layer {
+        opacity: 0.035;
     }
 
-    .intro-eyebrow span {
-        width: 22px;
-    }
-
-    .intro-description {
-        max-width: 300px;
-    }
-
-    .book-top-label {
-        gap: 10px;
-    }
-
-    .book-top-line {
-        width: 20px;
-    }
-
-    .book-stage {
-        max-width: calc(100vw - 12px);
-    }
-
-    .cover-corner {
-        width: 7%;
-        height: 7%;
-    }
-
-    .floating-word {
-        opacity: 0.55;
-    }
-
-    .vignette-layer {
-        background:
-            radial-gradient(
-                ellipse at center,
-                transparent 30%,
-                rgba(0, 0, 0, 0.28) 70%,
-                rgba(0, 0, 0, 0.72) 115%
-            );
-    }
-
-    .ending-content {
-        width: calc(100vw - 40px);
-    }
-}
-
-@media (max-width: 480px) {
-    .preloader-inner {
-        width: 140px;
-    }
-
-    .intro-eyebrow {
-        margin-bottom: 17px;
+    .ending-small {
+        margin-bottom: 22px;
         font-size: 6px;
+        letter-spacing: 0.3em;
+    }
+
+    .ending-title {
+        font-size: clamp(48px, 14vw, 78px);
+    }
+
+    .ending-divider {
+        margin-top: 24px;
+        width: min(170px, 52vw);
+    }
+
+    .ending-name {
+        margin-top: 20px;
+        font-size: clamp(44px, 12vw, 70px);
+    }
+}
+
+@media (max-width: 520px) {
+    :root {
+        --book-width: min(94vw, 520px);
+        --book-height: min(55vh, 350px);
+    }
+
+    .intro-content {
+        width: calc(100vw - 36px);
     }
 
     .intro-title {
-        font-size: 48px;
-    }
-
-    .intro-divider {
-        width: 145px;
-        margin-top: 21px;
-        margin-bottom: 17px;
+        font-size: clamp(39px, 13vw, 58px);
     }
 
     .intro-description {
-        font-size: 15px;
         max-width: 270px;
+        font-size: 15px;
     }
 
     .open-button {
         width: 104px;
         height: 104px;
-        margin-top: 31px;
+        margin-top: 28px;
     }
 
     .open-button-content {
@@ -342,33 +261,134 @@
         font-size: 16px;
     }
 
-    .intro-footnote {
-        margin-top: 25px;
-        font-size: 6px;
-        letter-spacing: 0.28em;
+    .book-interface {
+        padding: 64px 8px 72px;
     }
 
     .book-stage {
-        width: calc(100vw - 12px);
-        max-width: calc(100vw - 12px);
+        max-width: calc(100vw - 16px);
+        max-height: calc(100vh - 136px);
+    }
+
+    .book-top-label {
+        gap: 9px;
     }
 
     .book-top-label span:nth-child(2) {
         font-size: 6px;
+        letter-spacing: 0.28em;
+    }
+
+    .book-top-line {
+        width: 24px;
+    }
+
+    .cover-mini-title {
+        font-size: 5px;
+        letter-spacing: 0.32em;
+    }
+
+    .cover-symbol span {
+        width: 16px;
+    }
+
+    .cover-symbol i {
+        font-size: 13px;
+    }
+
+    .cover-name {
+        font-size: clamp(22px, 7vw, 38px);
+    }
+
+    .cover-date {
+        font-size: 5px;
+        letter-spacing: 0.28em;
     }
 
     .page-number {
-        display: none;
+        bottom: 3%;
+        font-size: 7px;
     }
 
-    .cover-corner {
-        opacity: 0.3;
+    .page-number-left {
+        left: 5%;
+    }
+
+    .page-number-right {
+        right: 5%;
+    }
+
+    .finish-reading {
+        bottom: max(16px, calc(var(--safe-bottom) + 14px));
+    }
+
+    .finish-reading-inner {
+        padding: 9px 13px;
+        gap: 8px;
+    }
+
+    .finish-reading-text {
+        font-size: 5px;
+    }
+
+    .finish-reading-icon {
+        font-size: 11px;
+    }
+
+    .music-indicator {
+        right: max(12px, calc(var(--safe-right) + 12px));
+        bottom: max(16px, calc(var(--safe-bottom) + 14px));
+    }
+
+    .music-icon {
+        width: 12px;
+        height: 10px;
+    }
+
+    .music-icon i {
+        width: 2px;
+    }
+
+    .book-progress {
+        bottom: max(17px, calc(var(--safe-bottom) + 15px));
+    }
+
+    .progress-dot {
+        width: 2px;
+        height: 2px;
+    }
+
+    .progress-dot.active {
+        transform: scale(2);
+    }
+
+    .floating-word {
+        opacity: 0.6;
+    }
+
+    .floating-word-one {
+        top: 9%;
+        left: -10%;
+    }
+
+    .floating-word-two {
+        right: -10%;
+        bottom: 10%;
+    }
+
+    .floating-word-three {
+        top: 7%;
+        right: 0;
+    }
+
+    .ending-content {
+        width: calc(100vw - 32px);
     }
 
     .ending-small {
-        font-size: 6px;
         gap: 9px;
-        margin-bottom: 22px;
+        margin-bottom: 20px;
+        letter-spacing: 0.24em;
     }
 
     .ending-small span {
@@ -376,28 +396,32 @@
     }
 
     .ending-title {
-        font-size: 53px;
+        font-size: clamp(44px, 15vw, 68px);
     }
 
     .ending-divider {
-        width: 145px;
-        margin-top: 25px;
+        margin-top: 22px;
+        width: min(155px, 55vw);
+    }
+
+    .ending-divider i {
+        font-size: 15px;
     }
 
     .ending-name {
-        margin-top: 20px;
-        font-size: 55px;
+        margin-top: 18px;
+        font-size: clamp(42px, 14vw, 64px);
     }
 }
 
 @media (max-height: 700px) and (min-width: 701px) {
     :root {
-        --book-height: min(70vh, 540px);
+        --book-height: min(66vh, 500px);
     }
 
     .book-interface {
-        padding-top: 45px;
-        padding-bottom: 55px;
+        padding-top: 56px;
+        padding-bottom: 58px;
     }
 
     .book-top-label {
@@ -405,56 +429,144 @@
     }
 
     .finish-reading {
-        bottom: 17px;
+        bottom: 16px;
     }
 
     .music-indicator {
-        bottom: 19px;
+        bottom: 16px;
     }
 
     .book-progress {
-        bottom: 20px;
+        bottom: 17px;
     }
 
-    .intro-description {
-        font-size: 15px;
+    .cover-mini-title {
+        margin-bottom: 10px;
+    }
+
+    .cover-symbol {
+        margin-bottom: 9px;
+    }
+
+    .cover-date {
+        margin-top: 10px;
+    }
+}
+
+@media (max-height: 600px) {
+    :root {
+        --book-height: min(62vh, 330px);
+    }
+
+    .intro-eyebrow {
+        margin-bottom: 12px;
+    }
+
+    .intro-divider {
+        margin-top: 16px;
+        margin-bottom: 12px;
     }
 
     .open-button {
-        margin-top: 27px;
-        width: 105px;
-        height: 105px;
+        width: 88px;
+        height: 88px;
+        margin-top: 20px;
+    }
+
+    .open-button-content {
+        width: 58px;
+        height: 58px;
     }
 
     .intro-footnote {
-        margin-top: 22px;
-    }
-}
-
-@media (min-aspect-ratio: 2.2/1) {
-    :root {
-        --book-width: min(66vw, 1080px);
-        --book-height: min(72vh, 650px);
-    }
-
-    .book-stage {
-        max-width: calc(100vw - 120px);
-    }
-
-    .intro-title {
-        font-size: clamp(54px, 6vw, 88px);
-    }
-}
-
-@media (min-aspect-ratio: 2.8/1) {
-    :root {
-        --book-width: min(58vw, 1040px);
-        --book-height: min(70vh, 610px);
+        margin-top: 18px;
     }
 
     .book-interface {
-        padding-top: 65px;
-        padding-bottom: 65px;
+        padding-top: 46px;
+        padding-bottom: 48px;
+    }
+
+    .book-top-label {
+        top: 13px;
+    }
+
+    .finish-reading,
+    .music-indicator {
+        bottom: 10px;
+    }
+
+    .book-progress {
+        bottom: 11px;
+    }
+}
+
+@media (orientation: portrait) {
+    .book-screen {
+        perspective: 1800px;
+    }
+
+    :root {
+        --book-width: min(94vw, 600px);
+        --book-height: min(54vh, 430px);
+    }
+
+    .book-stage {
+        max-width: calc(100vw - 20px);
+    }
+
+    .book-halo {
+        width: 110vw;
+        height: 80vh;
+    }
+
+    .book-halo-secondary {
+        width: 85vw;
+        height: 65vh;
+    }
+}
+
+@media (orientation: landscape) and (max-height: 500px) {
+    :root {
+        --book-width: min(82vw, 760px);
+        --book-height: min(76vh, 330px);
+    }
+
+    .book-interface {
+        padding-top: 42px;
+        padding-bottom: 44px;
+    }
+
+    .book-top-label {
+        top: 10px;
+    }
+
+    .finish-reading {
+        bottom: 8px;
+    }
+
+    .music-indicator {
+        bottom: 9px;
+    }
+
+    .book-progress {
+        bottom: 10px;
+    }
+}
+
+@media (min-width: 1600px) and (min-height: 900px) {
+    :root {
+        --book-width: min(68vw, 1180px);
+        --book-height: min(70vh, 720px);
+    }
+
+    .book-interface {
+        padding-top: 90px;
+        padding-bottom: 75px;
+    }
+
+    .intro-title {
+        font-size: clamp(70px, 6vw, 108px);
     }
 }
 
@@ -480,21 +592,13 @@
     }
 
     .finish-reading:hover .finish-reading-inner {
-        transform: none;
         border-color: rgba(255, 255, 255, 0.1);
         background: rgba(255, 255, 255, 0.015);
+        transform: none;
     }
 
     .finish-reading:hover .finish-reading-glow {
         opacity: 0;
-    }
-
-    .book:hover .cover-image {
-        transform: scale(1.015);
-        filter:
-            saturate(0.82)
-            contrast(1.05)
-            brightness(0.78);
     }
 
     .cursor-glow {
@@ -502,93 +606,40 @@
     }
 }
 
-@media (hover: hover) and (pointer: fine) {
-    .book-page {
-        cursor: pointer;
+@media (hover: none) {
+    .open-button:hover .open-button-ring {
+        transform: none;
     }
 
-    .book-cover-front,
-    .book-cover-back {
-        cursor: pointer;
+    .open-button:hover .open-button-glow {
+        transform: none;
     }
 
-    .book-page:hover .page-highlight {
-        opacity: 1;
+    .open-button:hover .open-button-content {
+        transform: none;
     }
 
-    .book-page:hover .page-image {
-        filter:
-            saturate(0.92)
-            contrast(1.025)
-            brightness(1);
-        transition:
-            filter 500ms ease;
+    .open-button:hover .open-button-arrow {
+        transform: none;
     }
 }
 
-@media (orientation: portrait) {
-    .book-screen {
-        perspective: 1400px;
-    }
-
-    .book-stage {
-        perspective: 1800px;
-    }
-}
-
-@media (orientation: landscape) {
-    .book-screen {
-        perspective: 2200px;
-    }
-
-    .book-stage {
-        perspective: 2600px;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .cursor-glow,
-    .floating-word,
-    .aurora,
-    .ambient-glow,
-    .grain-layer {
-        animation: none !important;
-    }
-
-    .intro-content,
-    .book-stage,
-    .ending-content {
-        transform: none !important;
-    }
-}
-
-@supports not (height: 100dvh) {
-    .screen,
+@media print {
+    html,
+    body,
     #app,
     #main {
-        min-height: 100vh;
-        height: 100vh;
-    }
-}
-
-@supports (padding: env(safe-area-inset-top)) {
-    .book-interface {
-        padding-top: max(5vh, env(safe-area-inset-top));
-        padding-bottom: max(4vh, env(safe-area-inset-bottom));
-        padding-left: max(5vw, env(safe-area-inset-left));
-        padding-right: max(5vw, env(safe-area-inset-right));
+        width: 100%;
+        height: auto;
+        min-height: auto;
+        overflow: visible;
+        background: #fff;
     }
 
-    .finish-reading {
-        bottom: max(24px, env(safe-area-inset-bottom));
+    .preloader,
+    .cursor-glow,
+    .ambient-background,
+    .transition-overlay {
+        display: none !important;
     }
-
-    .music-indicator {
-        right: max(20px, env(safe-area-inset-right));
-        bottom: max(22px, env(safe-area-inset-bottom));
-    }
-
-    .book-progress {
-        bottom: max(25px, env(safe-area-inset-bottom));
-    }
-      }
+        }
